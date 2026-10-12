@@ -1,0 +1,12 @@
+{
+  "baseURL": "https://gonella.com.br",
+  "stats": {
+    "startTime": "2026-10-12T10:55:18.511Z",
+    "duration": 21791.403,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceCommit": "5ab2504d988e97dd8c3b56de68c2a184fc8e556a"
+}

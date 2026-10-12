@@ -74,5 +74,50 @@
     "allPortfolioHashesMatch": true
   },
   "protectedNewEntriesServerModify": "20261012034408..20261012034425",
-  "note": "Original protected entries are preserved. New estudos entries appeared after the verified deployment; no portfolio write destination belongs to estudos or img."
+  "note": "Original protected entries are preserved. New estudos entries appeared after the verified deployment; no portfolio write destination belongs to estudos or img.",
+  "finalDeployCommit": "5ab2504d988e97dd8c3b56de68c2a184fc8e556a",
+  "finalSourceValidationRun": "https://github.com/lucasgonella/personal-portfolio/actions/runs/38239253436",
+  "finalPublicationVerification": {
+    "date": "2026-10-12T10:56:44.058785+00:00",
+    "protected": {
+      "img": {
+        "unchanged": true,
+        "entries": 1,
+        "files": 1,
+        "original_entries_preserved": true,
+        "modified_or_missing_original_entries": 0,
+        "added_entries": 0,
+        "sha256_before": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263",
+        "sha256_after": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263"
+      },
+      "estudos": {
+        "unchanged": true,
+        "entries": 17,
+        "files": 13,
+        "original_entries_preserved": true,
+        "modified_or_missing_original_entries": 0,
+        "added_entries": 0,
+        "sha256_before": "1d8826aa8f78c37422f97c609de093f9ae1e62ebfa0f661c99e2a46f2d1f98f2",
+        "sha256_after": "1d8826aa8f78c37422f97c609de093f9ae1e62ebfa0f661c99e2a46f2d1f98f2"
+      }
+    },
+    "http": [
+      {
+        "url": "https://gonella.com.br/",
+        "status": 200,
+        "final_url": "https://gonella.com.br/",
+        "sha256": "94183ae7362b6f3af8d81803023c1df36ce0180329fbec77894c67840bb9589b",
+        "bytes": 64492
+      },
+      {
+        "url": "https://gonella.com.br/estudos/",
+        "status": 200,
+        "final_url": "https://gonella.com.br/estudos/",
+        "sha256": "ef0f9bfd2349ea30da7432cc60e1632e2cb2f5d5847a41b6f75401cc4967ccaf",
+        "bytes": 946
+      }
+    ],
+    "allPortfolioHashesMatch": true,
+    "ok": true
+  }
 }

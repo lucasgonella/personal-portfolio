@@ -3,11 +3,11 @@
     "name": "pt-mobile",
     "url": "https://gonella.com.br/",
     "lighthouseVersion": "13.5.0",
-    "fetchTime": "2026-10-12T10:39:57.763Z",
+    "fetchTime": "2026-10-12T10:57:51.203Z",
     "environment": {
       "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
       "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
-      "benchmarkIndex": 3626.5,
+      "benchmarkIndex": 3565.5,
       "credits": {
         "axe-core": "4.13.0"
       }
@@ -79,23 +79,23 @@
     },
     "metrics": {
       "first-contentful-paint": {
-        "value": 1658.7945,
+        "value": 1677.182,
         "display": "1.7\u00a0s"
       },
       "largest-contentful-paint": {
-        "value": 1808.7945,
-        "display": "1.8\u00a0s"
+        "value": 1859.682,
+        "display": "1.9\u00a0s"
       },
       "total-blocking-time": {
-        "value": 0,
-        "display": "0\u00a0ms"
+        "value": 7.5,
+        "display": "10\u00a0ms"
       },
       "cumulative-layout-shift": {
-        "value": 2.207145408262469e-05,
-        "display": "0"
+        "value": 0.010056593055543824,
+        "display": "0.01"
       },
       "speed-index": {
-        "value": 1658.7945,
+        "value": 1677.182,
         "display": "1.7\u00a0s"
       }
     },
@@ -123,11 +123,11 @@
     "name": "pt-desktop",
     "url": "https://gonella.com.br/",
     "lighthouseVersion": "13.5.0",
-    "fetchTime": "2026-10-12T10:40:09.753Z",
+    "fetchTime": "2026-10-12T10:58:03.325Z",
     "environment": {
       "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
       "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
-      "benchmarkIndex": 3531,
+      "benchmarkIndex": 3595.5,
       "credits": {
         "axe-core": "4.13.0"
       }
@@ -199,11 +199,11 @@
     },
     "metrics": {
       "first-contentful-paint": {
-        "value": 378.158,
+        "value": 367.90999999999997,
         "display": "0.4\u00a0s"
       },
       "largest-contentful-paint": {
-        "value": 422.658,
+        "value": 422.40999999999997,
         "display": "0.4\u00a0s"
       },
       "total-blocking-time": {
@@ -215,7 +215,7 @@
         "display": "0"
       },
       "speed-index": {
-        "value": 611.8027261196983,
+        "value": 606.686007675559,
         "display": "0.6\u00a0s"
       }
     },
@@ -229,7 +229,7 @@
         "id": "unused-javascript",
         "title": "Reduce unused JavaScript",
         "score": 0.5,
-        "display": "Est savings of 75\u00a0KiB"
+        "display": "Est savings of 81\u00a0KiB"
       },
       {
         "id": "document-latency-insight",
@@ -253,11 +253,11 @@
     "name": "en-mobile",
     "url": "https://gonella.com.br/gonella-portfolio-v1/en/",
     "lighthouseVersion": "13.5.0",
-    "fetchTime": "2026-10-12T10:40:22.296Z",
+    "fetchTime": "2026-10-12T10:58:15.730Z",
     "environment": {
       "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
       "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
-      "benchmarkIndex": 3520.5,
+      "benchmarkIndex": 3644.5,
       "credits": {
         "axe-core": "4.13.0"
       }
@@ -322,30 +322,30 @@
       "skipAudits": null
     },
     "scores": {
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
       "first-contentful-paint": {
-        "value": 1367.559,
+        "value": 1370.7485000000001,
         "display": "1.4\u00a0s"
       },
       "largest-contentful-paint": {
-        "value": 1517.559,
-        "display": "1.5\u00a0s"
+        "value": 1562.2485000000001,
+        "display": "1.6\u00a0s"
       },
       "total-blocking-time": {
-        "value": 1,
-        "display": "0\u00a0ms"
+        "value": 7.5,
+        "display": "10\u00a0ms"
       },
       "cumulative-layout-shift": {
-        "value": 0.009809740500260539,
+        "value": 0.009787669046177915,
         "display": "0.01"
       },
       "speed-index": {
-        "value": 1367.559,
+        "value": 1380.353121794995,
         "display": "1.4\u00a0s"
       }
     },
@@ -354,7 +354,7 @@
         "id": "unused-javascript",
         "title": "Reduce unused JavaScript",
         "score": 0,
-        "display": "Est savings of 34\u00a0KiB"
+        "display": "Est savings of 26\u00a0KiB"
       },
       {
         "id": "network-dependency-tree-insight",

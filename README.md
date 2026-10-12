@@ -39,7 +39,7 @@ Node portable instalado e verificado em `.tools/` é local e ignorado. Não é n
 - Explorer tem sete controles HTML acessíveis equivalentes aos objetos 3D. Seleção atualiza o painel e liga ao projeto público correspondente.
 - Showcases usam SVG/CSS/HTML próprios, identificados como demonstrativos. Sem screenshots de infraestrutura interna ou telemetria real.
 - Sem backend, formulário que simula envio, analytics de terceiros ou chamadas GitHub pelo navegador.
-- Manrope e IBM Plex Mono servidos localmente em WOFF2; licenças OFL nos pacotes de origem.
+- Manrope e IBM Plex Mono servidos localmente em WOFF2; avisos de licença OFL preservados em `docs/licenses/`.
 
 `src/content.ts` contém textos PT/EN, ferramentas, nós conceituais e canais públicos. `src/projects.ts` contém a curadoria editorial. `src/data/projects.json` contém apenas metadados públicos atualizados no build.
 
