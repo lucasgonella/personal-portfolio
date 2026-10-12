@@ -1,0 +1,81 @@
+{
+  "verifiedAt": "2026-10-12T02:15:47.737Z",
+  "repositories": [
+    {
+      "name": "homelab-ansible",
+      "url": "https://github.com/lucasgonella/homelab-ansible",
+      "description": "Personal HomeLab automation with Ansible, Proxmox, Zabbix, Pi-hole and infrastructure-as-code practices.",
+      "language": "Shell",
+      "languages": [
+        "Shell",
+        "Jinja"
+      ],
+      "fork": false,
+      "updatedAt": "2026-09-29T02:52:40Z",
+      "lastCommitAt": "2026-09-29T02:52:34Z",
+      "lastCommit": "77f315bf8723ceab59a3d7fb6502a5936a02a527"
+    },
+    {
+      "name": "election-results-platform",
+      "url": "https://github.com/lucasgonella/election-results-platform",
+      "description": null,
+      "language": "Python",
+      "languages": [
+        "Python",
+        "JavaScript",
+        "PHP",
+        "HTML",
+        "CSS",
+        "Shell",
+        "PLpgSQL"
+      ],
+      "fork": false,
+      "updatedAt": "2026-10-12T00:42:57Z",
+      "lastCommitAt": "2026-10-12T00:42:53Z",
+      "lastCommit": "2599eae56ab3d016ca5c72cc757102c42afe6e0b"
+    },
+    {
+      "name": "devops-sre-lab",
+      "url": "https://github.com/lucasgonella/devops-sre-lab",
+      "description": null,
+      "language": "Shell",
+      "languages": [
+        "Shell",
+        "Python",
+        "Dockerfile"
+      ],
+      "fork": false,
+      "updatedAt": "2026-09-06T18:35:12Z",
+      "lastCommitAt": "2026-09-06T18:35:06Z",
+      "lastCommit": "4576d538f9cd46bd531d79c0caaae828c9b85b22"
+    },
+    {
+      "name": "Terraform",
+      "url": "https://github.com/lucasgonella/Terraform",
+      "description": null,
+      "language": "HCL",
+      "languages": [
+        "HCL"
+      ],
+      "fork": false,
+      "updatedAt": "2026-03-06T21:44:27Z",
+      "lastCommitAt": "2026-03-06T21:44:18Z",
+      "lastCommit": "e5bbe9bc9bcc1107a322a13da08b6c48f80a9ede"
+    },
+    {
+      "name": "prometheus-grafana",
+      "url": "https://github.com/lucasgonella/prometheus-grafana",
+      "description": null,
+      "language": "Java",
+      "languages": [
+        "Java",
+        "Shell",
+        "Dockerfile"
+      ],
+      "fork": false,
+      "updatedAt": "2023-02-14T02:58:46Z",
+      "lastCommitAt": "2023-02-14T02:53:21Z",
+      "lastCommit": "be816b704ce0a06d2e5220f171e202abecf067ba"
+    }
+  ]
+}

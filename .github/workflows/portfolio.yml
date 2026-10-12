@@ -1,0 +1,110 @@
+name: Portfolio validation and restricted FTP publication
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Publish the checked build via FTP port 21'
+        required: true
+        default: false
+        type: boolean
+      refresh_projects:
+        description: 'Refresh verified public GitHub metadata'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gonella-portfolio-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - run: npm ci --no-fund
+      - if: github.event_name == 'workflow_dispatch' && inputs.refresh_projects
+        run: npm run refresh:projects
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Browser tests
+        run: |
+          npm run preview > /tmp/gonella-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:e2e
+      - name: Package checked build and allowlist
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: checked-portfolio
+          path: |
+            dist/
+            .deploy/manifest.json
+            artifacts/e2e-results.json
+          include-hidden-files: true
+          retention-days: 30
+      - name: Inventory, backup and FTP publication
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+        env:
+          LOCAWEB_FTP_HOST: ${{ secrets.LOCAWEB_FTP_HOST }}
+          LOCAWEB_FTP_USER: ${{ secrets.LOCAWEB_FTP_USER }}
+          LOCAWEB_FTP_PASSWORD: ${{ secrets.LOCAWEB_FTP_PASSWORD }}
+          LOCAWEB_FTP_PORT: ${{ secrets.LOCAWEB_FTP_PORT }}
+        run: |
+          python scripts/ftp.py inventory
+          python scripts/ftp.py deploy
+          if ! python scripts/ftp.py verify; then
+            python scripts/ftp.py rollback
+            exit 1
+          fi
+      - name: Production HTTP and browser verification
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+        env:
+          TEST_BASE_URL: https://gonella.com.br
+          LOCAWEB_FTP_HOST: ${{ secrets.LOCAWEB_FTP_HOST }}
+          LOCAWEB_FTP_USER: ${{ secrets.LOCAWEB_FTP_USER }}
+          LOCAWEB_FTP_PASSWORD: ${{ secrets.LOCAWEB_FTP_PASSWORD }}
+          LOCAWEB_FTP_PORT: ${{ secrets.LOCAWEB_FTP_PORT }}
+        run: |
+          if ! python scripts/verify-http.py || ! npm run test:e2e; then
+            python scripts/ftp.py rollback
+            exit 1
+          fi
+      - name: Retain rollback evidence
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.deploy
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: portfolio-rollback-${{ github.run_id }}
+          path: |
+            .deploy/backup/index.html
+            .deploy/backup/robots.txt
+            .deploy/backup/sitemap.xml
+            .deploy/backup/favicon-gonella.svg
+            .deploy/backup/404.html
+            .deploy/backup/ownership.json
+            .deploy/inventory.json
+            .deploy/manifest.json
+            .deploy/verification.json
+          include-hidden-files: true
+          retention-days: 30

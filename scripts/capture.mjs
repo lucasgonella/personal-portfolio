@@ -1,0 +1,27 @@
+import { chromium } from '@playwright/test'
+import { mkdir } from 'node:fs/promises'
+
+const browser=await chromium.launch({channel:process.env.TEST_BROWSER_CHANNEL||undefined,headless:true})
+await mkdir('artifacts',{recursive:true})
+const base=process.env.TEST_BASE_URL||'http://127.0.0.1:4173'
+const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1})
+await page.goto(base,{waitUntil:'networkidle'})
+await page.waitForTimeout(2000)
+await page.screenshot({path:'artifacts/desktop-hero.png'})
+await page.locator('#explorer').scrollIntoViewIfNeeded()
+await page.waitForTimeout(2000)
+await page.screenshot({path:'artifacts/desktop-explorer.png'})
+await page.locator('#projects').scrollIntoViewIfNeeded()
+await page.waitForTimeout(1000)
+await page.screenshot({path:'artifacts/desktop-projects.png'})
+await page.emulateMedia({reducedMotion:'reduce'})
+await page.goto(base)
+await page.screenshot({path:'artifacts/desktop-full.png',fullPage:true})
+await page.setViewportSize({width:390,height:844})
+await page.goto(base)
+await page.screenshot({path:'artifacts/mobile-hero.png'})
+await page.locator('#explorer').scrollIntoViewIfNeeded()
+await page.screenshot({path:'artifacts/mobile-explorer.png'})
+await page.screenshot({path:'artifacts/mobile-full.png',fullPage:true})
+console.log('Desktop and mobile screenshots saved to artifacts/.')
+await browser.close()

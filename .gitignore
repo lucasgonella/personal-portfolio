@@ -1,0 +1,14 @@
+.secrets/
+.tools/
+.deploy/
+node_modules/
+dist/
+test-results/
+playwright-report/
+artifacts/
+.env
+.env.*
+!.env.example
+*.log
+__pycache__/
+.pytest_cache/
