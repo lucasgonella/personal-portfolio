@@ -103,6 +103,7 @@ jobs:
             .deploy/backup/favicon-gonella.svg
             .deploy/backup/404.html
             .deploy/backup/ownership.json
+            .deploy/backup/namespace-htaccess
             .deploy/inventory.json
             .deploy/manifest.json
             .deploy/verification.json

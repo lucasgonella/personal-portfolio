@@ -123,6 +123,12 @@ def inventory():
                 report['ownership_verified'] = True
                 (STATE/'backup').mkdir(exist_ok=True)
                 (STATE/'backup/ownership.json').write_bytes(read(ftp, OWNER_PATH))
+                try:
+                    config=read(ftp,NAMESPACE+'/.htaccess')
+                    (STATE/'backup/namespace-htaccess').write_bytes(config)
+                    report['namespace_config_sha256']=sha(config)
+                except ftplib.error_perm:
+                    pass
             except (ftplib.error_perm, ValueError, KeyError):
                 raise RuntimeError('Existing namespace ownership is unproved; inventory stopped without writes') from None
         backup = STATE / 'backup'
@@ -145,7 +151,7 @@ def allowed(path):
     p = pathlib.PurePosixPath(path)
     if p.is_absolute() or '..' in p.parts or '\\' in path:
         return False
-    return path in ROOT_ALLOWLIST or path == NAMESPACE + '/en/index.html' or (len(p.parts) >= 2 and p.parts[0] == NAMESPACE and p.suffix in {'.js','.css','.svg','.webp','.avif','.png','.woff2','.json','.glb'})
+    return path in ROOT_ALLOWLIST or path in {NAMESPACE + '/en/index.html', NAMESPACE + '/.htaccess'} or (len(p.parts) >= 2 and p.parts[0] == NAMESPACE and p.suffix in {'.js','.css','.svg','.webp','.avif','.png','.woff2','.json','.glb'})
 
 def manifest():
     files = []
@@ -222,7 +228,7 @@ def deploy():
                 if path not in previous or sha(existing) != previous[path]:
                     raise RuntimeError('Existing asset is unknown or changed since previous deploy: '+path)
     uploaded=[]
-    for f in sorted(payload['files'],key=lambda f:(f['path']=='index.html','/' not in f['path'],f['path'])):
+    for f in sorted(payload['files'],key=lambda f:(f['path']=='index.html',f['path'].endswith('.html'),'/' not in f['path'],f['path'])):
         data=(ROOT/'dist'/f['path']).read_bytes()
         assert sha(data)==f['sha256']
         transfer(f['path'],data,root)
@@ -263,6 +269,14 @@ def rollback():
     assert sha(backup.read_bytes())==report['root_hashes']['index.html']
     payload=json.loads((STATE/'manifest.json').read_text(encoding='utf-8'))
     if (STATE/'backup/ownership.json').exists():
+        if any(f['path']==NAMESPACE+'/.htaccess' for f in payload['files']):
+            config_backup=STATE/'backup/namespace-htaccess'
+            if report.get('namespace_config_sha256'):
+                config=config_backup.read_bytes()
+                assert sha(config)==report['namespace_config_sha256']
+            else:
+                config=b'# Portfolio overrides disabled after rollback.\n'
+            transfer(NAMESPACE+'/.htaccess',config,report['document_root'])
         transfer(OWNER_PATH,(STATE/'backup/ownership.json').read_bytes(),report['document_root'])
     for f in sorted(payload['files'],key=lambda f:f['path']=='index.html'):
         path=f['path']

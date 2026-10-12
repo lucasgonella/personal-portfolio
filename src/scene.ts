@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { nodes } from './content'
 
@@ -15,12 +14,6 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   renderer.domElement.setAttribute('aria-hidden','true')
   host.appendChild(renderer.domElement)
   const scene=new THREE.Scene()
-  const environment=new RoomEnvironment()
-  const pmrem=new THREE.PMREMGenerator(renderer)
-  const envTarget=pmrem.fromScene(environment,.04)
-  scene.environment=envTarget.texture
-  environment.dispose()
-  pmrem.dispose()
   scene.add(new THREE.AmbientLight('#b6c7c0',1.1))
   const keyLight=new THREE.DirectionalLight('#ecfff2',3.5)
   keyLight.position.set(4,7,5)
@@ -38,10 +31,10 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   camera.lookAt(0,0,0)
   const model=new THREE.Group()
   scene.add(model)
-  const dark=new THREE.MeshStandardMaterial({color:'#23332f',roughness:.28,metalness:.92})
-  const side=new THREE.MeshStandardMaterial({color:'#14201e',roughness:.35,metalness:.8})
+  const dark=new THREE.MeshStandardMaterial({color:'#30433b',roughness:.26,metalness:.5})
+  const side=new THREE.MeshStandardMaterial({color:'#1d2b25',roughness:.35,metalness:.4})
   const black=new THREE.MeshStandardMaterial({color:'#080f0d',roughness:.5,metalness:.4})
-  const silver=new THREE.MeshStandardMaterial({color:'#809e8b',roughness:.29,metalness:.9})
+  const silver=new THREE.MeshStandardMaterial({color:'#809e8b',roughness:.29,metalness:.55})
   const mint=new THREE.MeshStandardMaterial({color:'#b5ffdb',emissive:'#8ef6c6',emissiveIntensity:1.5,roughness:.35,metalness:.4})
   const violet=new THREE.MeshStandardMaterial({color:'#a89be0',emissive:'#9987df',emissiveIntensity:.8,roughness:.4,metalness:.4})
   const disposables=new Set<THREE.BufferGeometry|THREE.Material|THREE.Texture>([dark,side,black,silver,mint,violet])
@@ -226,7 +219,7 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   function start(){cancelAnimationFrame(frame);frame=requestAnimationFrame(animate)}
   function select(index:number){
     selected=index
-    nodeMaterials.forEach((mat,i)=>{mat.color.set(i===index?'#537761':'#23332f');mat.emissive.set(i===index?'#163523':'#000000');mat.emissiveIntensity=.4})
+    nodeMaterials.forEach((mat,i)=>{mat.color.set(i===index?'#537761':'#30433b');mat.emissive.set(i===index?'#163523':'#000000');mat.emissiveIntensity=.4})
     labelMaterials.forEach((mat,i)=>mat.color.set(i===index?'#b6f4da':'#a4b3a7'))
     connections.forEach((line,i)=>{(line.material as THREE.LineBasicMaterial).opacity=index===0||index===i+1?.65:.2})
     render(last)
@@ -240,6 +233,6 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   return {
     select,
     pause(value){paused=value;if(paused){cancelAnimationFrame(frame);render(last)}else if(visible)start()},
-    dispose(){disposed=true;cancelAnimationFrame(frame);resizer.disconnect();observer.disconnect();timer.dispose();controls?.dispose();document.removeEventListener('visibilitychange',visibility);host.removeEventListener('pointermove',pointer);host.removeEventListener('pointerleave',pointerLeave);renderer.domElement.removeEventListener('pointerdown',down);renderer.domElement.removeEventListener('pointerup',click);renderer.domElement.removeEventListener('webglcontextlost',loss);disposables.forEach(item=>item.dispose());envTarget.dispose();renderer.dispose();renderer.domElement.remove()},
+    dispose(){disposed=true;cancelAnimationFrame(frame);resizer.disconnect();observer.disconnect();timer.dispose();controls?.dispose();document.removeEventListener('visibilitychange',visibility);host.removeEventListener('pointermove',pointer);host.removeEventListener('pointerleave',pointerLeave);renderer.domElement.removeEventListener('pointerdown',down);renderer.domElement.removeEventListener('pointerup',click);renderer.domElement.removeEventListener('webglcontextlost',loss);disposables.forEach(item=>item.dispose());renderer.dispose();renderer.domElement.remove()},
   }
 }

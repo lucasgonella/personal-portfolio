@@ -67,7 +67,7 @@ LOCAWEB_FTP_PASSWORD
 LOCAWEB_FTP_PORT
 ```
 
-O namespace exclusivo `gonella-portfolio-v1/` tem um marcador de propriedade e uma lista de arquivos controlados. A raiz usa uma allowlist fechada. `/estudos`, `/img`, `.htaccess` e arquivos desconhecidos não são destinos permitidos. Não são apagados assets antigos.
+O namespace exclusivo `gonella-portfolio-v1/` tem um marcador de propriedade e uma lista de arquivos controlados. A raiz usa uma allowlist fechada. `/estudos`, `/img`, o `.htaccess` da raiz e arquivos desconhecidos não são destinos permitidos. A configuração Apache própria dentro do namespace só comprime/cacheia o portfólio. Não são apagados assets antigos.
 
 ## SEO e acesso
 

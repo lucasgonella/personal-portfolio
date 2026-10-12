@@ -35,6 +35,9 @@ results=[];failures=[]
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
     futures={pool.submit(fetch,f['path']):f for f in payload['files']}
     for future,f in futures.items():
+        # Apache protects configuration files from HTTP. Their exact bytes are verified over FTP.
+        if f['path'].endswith('/.htaccess'):
+            continue
         try:
             result,content=future.result()
             result['matches_build']=result['sha256']==f['sha256']

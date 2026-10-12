@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 
 test('FTP allowlist rejects traversal, other apps, ambiguous root paths and build artifacts',()=>{
-  const cases={ 'index.html':true, 'robots.txt':true, 'gonella-portfolio-v1/app-a1.js':true, 'gonella-portfolio-v1/en/index.html':true, 'gonella-portfolio-v1/img/demo.webp':true, 'estudos/index.html':false, 'img/logo.png':false, '.htaccess':false, '../index.html':false, '/index.html':false, 'gonella-portfolio-v1/../../estudos/index.html':false, 'gonella-portfolio-v1/secret.env':false, 'gonella-portfolio-v1/other.html':false, 'gonella-portfolio-v1\\file.js':false, 'assets/other.js':false }
+  const cases={ 'index.html':true, 'robots.txt':true, 'gonella-portfolio-v1/app-a1.js':true, 'gonella-portfolio-v1/.htaccess':true, 'gonella-portfolio-v1/en/index.html':true, 'gonella-portfolio-v1/img/demo.webp':true, 'estudos/index.html':false, 'img/logo.png':false, '.htaccess':false, '../index.html':false, '/index.html':false, 'gonella-portfolio-v1/../../estudos/index.html':false, 'gonella-portfolio-v1/secret.env':false, 'gonella-portfolio-v1/other.html':false, 'gonella-portfolio-v1\\file.js':false, 'assets/other.js':false }
   const script="import json; from scripts.ftp import allowed; cases=json.loads(input()); print(json.dumps({p:allowed(p) for p in cases}))"
   const result=JSON.parse(execFileSync('python',['-c',script],{input:JSON.stringify(cases),encoding:'utf8'}))
   assert.deepEqual(result,cases)

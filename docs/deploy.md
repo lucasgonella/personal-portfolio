@@ -6,7 +6,7 @@ Destino confirmado: FTP **porta 21**, raiz `/public_html`, correspondente ao doc
 
 Allowlist fechada na raiz: `index.html`, `favicon-gonella.svg`, `robots.txt`, `sitemap.xml`, `404.html`. Só `index.html` tem substituição inicial explicitamente autorizada. Qualquer outro nome existente bloqueia a publicação, a menos que pertença ao manifesto de uma versão anterior verificada.
 
-Subdiretório exclusivo: `gonella-portfolio-v1/`. Assets versionados, WOFF2, arte Open Graph, página inglesa e marcador `ownership.json`. Não usa `assets/` ou `img/` preexistentes. Caminhos absolutos, traversal, `/estudos`, `.htaccess` e extensões fora da allowlist são rejeitados.
+Subdiretório exclusivo: `gonella-portfolio-v1/`. Assets versionados, WOFF2, arte Open Graph, página inglesa, marcador `ownership.json` e configuração Apache própria `.htaccess`. Compressão e cache só se aplicam dentro desse diretório do portfólio, sem regras globais. Não usa `assets/` ou `img/` preexistentes. Caminhos absolutos, traversal, `/estudos`, `.htaccess` da raiz e extensões fora da allowlist são rejeitados.
 
 ## Procedimento local
 
