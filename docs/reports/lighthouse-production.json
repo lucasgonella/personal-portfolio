@@ -1,0 +1,366 @@
+[
+  {
+    "name": "pt-mobile",
+    "url": "https://gonella.com.br/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-12T10:39:57.763Z",
+    "environment": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "benchmarkIndex": 3626.5,
+      "credits": {
+        "axe-core": "4.13.0"
+      }
+    },
+    "configSettings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "node",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 1658.7945,
+        "display": "1.7\u00a0s"
+      },
+      "largest-contentful-paint": {
+        "value": 1808.7945,
+        "display": "1.8\u00a0s"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "display": "0\u00a0ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 2.207145408262469e-05,
+        "display": "0"
+      },
+      "speed-index": {
+        "value": 1658.7945,
+        "display": "1.7\u00a0s"
+      }
+    },
+    "failedAudits": [
+      {
+        "id": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "score": 0,
+        "display": "Est savings of 34\u00a0KiB"
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "score": 0.5,
+        "display": "Est savings of 42\u00a0KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "name": "pt-desktop",
+    "url": "https://gonella.com.br/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-12T10:40:09.753Z",
+    "environment": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "benchmarkIndex": 3531,
+      "credits": {
+        "axe-core": "4.13.0"
+      }
+    },
+    "configSettings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1440,
+        "height": 1000,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "node",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 378.158,
+        "display": "0.4\u00a0s"
+      },
+      "largest-contentful-paint": {
+        "value": 422.658,
+        "display": "0.4\u00a0s"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "display": "0\u00a0ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 5.204604493690366e-05,
+        "display": "0"
+      },
+      "speed-index": {
+        "value": 611.8027261196983,
+        "display": "0.6\u00a0s"
+      }
+    },
+    "failedAudits": [
+      {
+        "id": "valid-source-maps",
+        "title": "Missing source maps for large first-party JavaScript",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "score": 0.5,
+        "display": "Est savings of 75\u00a0KiB"
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "score": 0.5,
+        "display": "Est savings of 42\u00a0KiB"
+      },
+      {
+        "id": "forced-reflow-insight",
+        "title": "Forced reflow",
+        "score": 0
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "name": "en-mobile",
+    "url": "https://gonella.com.br/gonella-portfolio-v1/en/",
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-12T10:40:22.296Z",
+    "environment": {
+      "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+      "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "benchmarkIndex": 3520.5,
+      "credits": {
+        "axe-core": "4.13.0"
+      }
+    },
+    "configSettings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "node",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 1367.559,
+        "display": "1.4\u00a0s"
+      },
+      "largest-contentful-paint": {
+        "value": 1517.559,
+        "display": "1.5\u00a0s"
+      },
+      "total-blocking-time": {
+        "value": 1,
+        "display": "0\u00a0ms"
+      },
+      "cumulative-layout-shift": {
+        "value": 0.009809740500260539,
+        "display": "0.01"
+      },
+      "speed-index": {
+        "value": 1367.559,
+        "display": "1.4\u00a0s"
+      }
+    },
+    "failedAudits": [
+      {
+        "id": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "score": 0,
+        "display": "Est savings of 34\u00a0KiB"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      }
+    ]
+  }
+]

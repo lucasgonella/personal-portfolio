@@ -50,7 +50,7 @@ python scripts/ftp.py rollback
 
 O comando valida o SHA-256 dos backups contra o inventário, restaura somente arquivos controlados da raiz que já existiam, restaura o marcador anterior se disponível e transfere o índice por último. Cada transferência é relida e verificada. Não remove arquivos nem diretórios. Assets com hash permanecem para que o HTML anterior continue funcional. Arquivos novos da raiz que não existiam antes ficam inertes; nenhum arquivo desconhecido é eliminado.
 
-O inventário original e o backup anterior à primeira publicação continuam locais. Um teste isolado com FTP simulado valida o conteúdo restaurado e a ordem. Não se realiza rollback em produção sem regressão observada.
+O inventário original e o backup anterior à primeira publicação continuam locais em `.deploy/releases/initial/`. Um teste isolado com FTP simulado valida o conteúdo restaurado e a ordem. A configuração própria do namespace é restaurada do backup, ou desativada de forma inerte quando não existia antes; o `.htaccess` da raiz nunca é transferido. Não se realiza rollback em produção sem regressão observada.
 
 ## GitHub Actions
 

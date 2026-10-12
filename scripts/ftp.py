@@ -155,7 +155,7 @@ def allowed(path):
 
 def manifest():
     files = []
-    for p in sorted((ROOT/'dist').rglob('*')):
+    for p in sorted((ROOT/'dist').rglob('*'),key=lambda p:p.relative_to(ROOT/'dist').as_posix()):
         if p.is_file():
             path = p.relative_to(ROOT/'dist').as_posix()
             if not allowed(path):
@@ -166,7 +166,7 @@ def manifest():
     owner={'namespace':NAMESPACE,'repository':OWNER_REPO,'site':'https://gonella.com.br/','files':[f for f in files if f['path'] != OWNER_PATH]}
     marker=ROOT/'dist'/OWNER_PATH
     marker.parent.mkdir(parents=True,exist_ok=True)
-    marker.write_text(json.dumps(owner,indent=2)+'\n',encoding='utf-8')
+    marker.write_text(json.dumps(owner,indent=2)+'\n',encoding='utf-8',newline='\n')
     files=[f for f in files if f['path'] != OWNER_PATH]
     files.append({'path':OWNER_PATH,'sha256':sha(marker.read_bytes()),'bytes':marker.stat().st_size})
     result={'namespace':NAMESPACE,'files':files}
@@ -247,8 +247,13 @@ def verify():
         assert root==before['document_root']
         for name,original in before['protected'].items():
             ftp.cwd(name)
-            current=protected_tree(ftp)
-            result['protected'][name]={'unchanged':current==original, 'entries':len(current)}
+            current=sorted(protected_tree(ftp),key=lambda item:item['path'])
+            original=sorted(original,key=lambda item:item['path'])
+            original_by_path={item['path']:item for item in original}
+            current_by_path={item['path']:item for item in current}
+            modified_original=[path for path,item in original_by_path.items() if current_by_path.get(path)!=item]
+            added=[path for path in current_by_path if path not in original_by_path]
+            result['protected'][name]={'unchanged':current==original, 'entries':len(current), 'files':sum(item['type']=='file' for item in current), 'original_entries_preserved':not modified_original, 'modified_or_missing_original_entries':len(modified_original), 'added_entries':len(added), 'sha256_before':sha(json.dumps(original,sort_keys=True).encode()), 'sha256_after':sha(json.dumps(current,sort_keys=True).encode())}
             ftp.cwd(root)
         for name,checksum in before['root_hashes'].items():
             if name not in controlled_root:

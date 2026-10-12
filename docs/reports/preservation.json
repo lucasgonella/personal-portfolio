@@ -1,0 +1,78 @@
+{
+  "deployCommit": "5f8dec086e81f8e06ed24734698faaa77ad79eac",
+  "workflow": "https://github.com/lucasgonella/personal-portfolio/actions/runs/38197610060",
+  "protocol": "FTP",
+  "port": 21,
+  "deploymentVerificationDate": "2026-10-12T02:58:27.990001+00:00",
+  "immediatelyAfterDeployment": {
+    "protected": {
+      "img": {
+        "unchanged": true,
+        "entries": 1
+      },
+      "estudos": {
+        "unchanged": true,
+        "entries": 2
+      }
+    },
+    "http": [
+      {
+        "url": "https://gonella.com.br/",
+        "status": 200,
+        "final_url": "https://gonella.com.br/",
+        "sha256": "1d18ed21122495019756cde63b3da200288a8a473cbd1b01d1957137d40f3906",
+        "bytes": 64455
+      },
+      {
+        "url": "https://gonella.com.br/estudos/",
+        "error_type": "HTTPError",
+        "status": 403
+      }
+    ],
+    "allPortfolioHashesMatch": true
+  },
+  "laterReadOnlyVerification": {
+    "date": "2026-10-12T10:47:53.737793+00:00",
+    "protected": {
+      "img": {
+        "unchanged": true,
+        "entries": 1,
+        "files": 1,
+        "original_entries_preserved": true,
+        "modified_or_missing_original_entries": 0,
+        "added_entries": 0,
+        "sha256_before": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263",
+        "sha256_after": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263"
+      },
+      "estudos": {
+        "unchanged": false,
+        "entries": 17,
+        "files": 13,
+        "original_entries_preserved": true,
+        "modified_or_missing_original_entries": 0,
+        "added_entries": 15,
+        "sha256_before": "ad86b697e3c627b2ff6fef0e59d7bafff25c401ae7285668448f3e7a569c21bc",
+        "sha256_after": "1d8826aa8f78c37422f97c609de093f9ae1e62ebfa0f661c99e2a46f2d1f98f2"
+      }
+    },
+    "http": [
+      {
+        "url": "https://gonella.com.br/",
+        "status": 200,
+        "final_url": "https://gonella.com.br/",
+        "sha256": "1d18ed21122495019756cde63b3da200288a8a473cbd1b01d1957137d40f3906",
+        "bytes": 64455
+      },
+      {
+        "url": "https://gonella.com.br/estudos/",
+        "status": 200,
+        "final_url": "https://gonella.com.br/estudos/",
+        "sha256": "ef0f9bfd2349ea30da7432cc60e1632e2cb2f5d5847a41b6f75401cc4967ccaf",
+        "bytes": 946
+      }
+    ],
+    "allPortfolioHashesMatch": true
+  },
+  "protectedNewEntriesServerModify": "20261012034408..20261012034425",
+  "note": "Original protected entries are preserved. New estudos entries appeared after the verified deployment; no portfolio write destination belongs to estudos or img."
+}

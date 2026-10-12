@@ -69,3 +69,34 @@ test('WebGL works when requested and context loss restores static art',async({pa
   await expect(page.locator('.scene-hero')).not.toHaveClass(/scene-ready/)
   await expect(page.locator('.scene-hero .scene-fallback-note')).toBeVisible()
 })
+
+test('Unavailable WebGL keeps the SVG fallback and topology controls functional',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'})
+  await page.addInitScript(()=>{
+    const original=HTMLCanvasElement.prototype.getContext
+    HTMLCanvasElement.prototype.getContext=function(type:string,options?:unknown){
+      if(type==='webgl'||type==='webgl2')return null
+      return original.call(this,type,options)
+    } as typeof original
+  })
+  await page.goto('/')
+  await page.locator('.scene-hero').getByRole('button',{name:'Ativar experiência 3D'}).click()
+  await expect(page.locator('.scene-hero .scene-fallback-note')).toBeVisible()
+  await expect(page.locator('.scene-hero')).not.toHaveClass(/scene-ready/)
+  await page.getByRole('group',{name:'Selecione um nó para explorar'}).getByRole('button',{name:'03 Redes'}).click()
+  await expect(page.locator('.node-panel h3')).toHaveText('Redes')
+})
+
+test('Static content and layout remain available without JavaScript',async({browser,baseURL,isMobile})=>{
+  const context=await browser.newContext({javaScriptEnabled:false,viewport:isMobile?{width:390,height:844}:{width:1440,height:1000}})
+  const page=await context.newPage()
+  await page.goto(baseURL+'/')
+  await expect(page.getByRole('heading',{level:1})).toContainText('Engenharia')
+  await expect(page.getByRole('heading',{name:'Homelab como código'})).toBeVisible()
+  await expect(page.locator('.hero')).toHaveCSS('position','relative')
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
+  await page.getByRole('link',{name:'EN',exact:true}).click()
+  await expect(page.locator('html')).toHaveAttribute('lang','en')
+  await expect(page.getByRole('heading',{level:1})).toContainText('Engineering')
+  await context.close()
+})

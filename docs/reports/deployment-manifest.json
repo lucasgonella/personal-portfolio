@@ -1,0 +1,85 @@
+{
+  "namespace": "gonella-portfolio-v1",
+  "files": [
+    {
+      "path": "404.html",
+      "sha256": "62588f4f8a3c06d9a63e376d9e9738e7e90deee732151b677a2501b5b9d78da4",
+      "bytes": 927
+    },
+    {
+      "path": "favicon-gonella.svg",
+      "sha256": "fab4b54bed403e4fed14c06a0f33ef06b9865ef5b2ef017b758e7d736d4042d3",
+      "bytes": 254
+    },
+    {
+      "path": "gonella-portfolio-v1/.htaccess",
+      "sha256": "0a610a14d0fa1e6660476fd213a074576e9e4c0ba2dba2ce56d8e441b4291429",
+      "bytes": 493
+    },
+    {
+      "path": "gonella-portfolio-v1/ScrollTrigger-BrDuEirF.js",
+      "sha256": "873b6d349c436877cd1273ead35533511d547061840e0d7fc3d00f5440bee2c5",
+      "bytes": 43547
+    },
+    {
+      "path": "gonella-portfolio-v1/en/index.html",
+      "sha256": "f026f7794e23226636e118e54300cfa06ae8d81538f482f24271cad41cf3c30b",
+      "bytes": 63981
+    },
+    {
+      "path": "gonella-portfolio-v1/ibm-plex-mono-latin-400-normal-DMJ8VG8y.woff2",
+      "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
+      "bytes": 14708
+    },
+    {
+      "path": "gonella-portfolio-v1/index-BhA33Pa5.js",
+      "sha256": "a8890aaf1e4b9c1b02b6065ffaaa9e77ecaa99571b7b0a4604c286655389079d",
+      "bytes": 272930
+    },
+    {
+      "path": "gonella-portfolio-v1/index-CALSXIMv.css",
+      "sha256": "4683d7f781ed74d4380c6a81c65d8c27caa69478fecad8879dbfcad84534ce75",
+      "bytes": 34023
+    },
+    {
+      "path": "gonella-portfolio-v1/index-D4-8ALNT.js",
+      "sha256": "86e1aee306e610f5e211c6e3b7a2348050782e9e700a8797a2db42afb451be49",
+      "bytes": 70426
+    },
+    {
+      "path": "gonella-portfolio-v1/manrope-latin-wght-normal-DHIcAJRg.woff2",
+      "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972",
+      "bytes": 24836
+    },
+    {
+      "path": "gonella-portfolio-v1/og-gonella.png",
+      "sha256": "a3350c99b2b110a7eac341a81978aeefb53687a0e88598eb7fb80678fd23825f",
+      "bytes": 229685
+    },
+    {
+      "path": "gonella-portfolio-v1/scene-2fRLW8di.js",
+      "sha256": "006ae4a40f67cde5d1465abd9f75a68f75a7bc7dd168c7b7780cfa91c7b9a1d1",
+      "bytes": 570616
+    },
+    {
+      "path": "index.html",
+      "sha256": "1d18ed21122495019756cde63b3da200288a8a473cbd1b01d1957137d40f3906",
+      "bytes": 64455
+    },
+    {
+      "path": "robots.txt",
+      "sha256": "e422ac22b67bfcd7ac60c41e75bc1b756393f65cc5f93b75b220666a1497623c",
+      "bytes": 68
+    },
+    {
+      "path": "sitemap.xml",
+      "sha256": "1fae5f24c5506e811f43e4ff41c260ba469ec92157ff21d48f8d0494bf0d38ed",
+      "bytes": 223
+    },
+    {
+      "path": "gonella-portfolio-v1/ownership.json",
+      "sha256": "15a642139eedd9bed8f5cee61a18013fcd1d9a5ca41f573fc6f2764224bd323e",
+      "bytes": 2662
+    }
+  ]
+}
