@@ -109,6 +109,8 @@ test('Career direction, evidence links and localized SEO distinguish the current
   for(const [path,role] of [['/','Analista de Infraestrutura Sênior'],['/gonella-portfolio-v1/en/','Senior Infrastructure Analyst']]){
     await page.goto(path)
     await expect(page.locator('.hero-role')).toHaveText(role)
+    await expect(page).toHaveTitle(/Platform/)
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Platform Engineering/)
     await expect(page.locator('.hero-goal')).toContainText('DevOps · SRE · Platform Engineering')
     const graph=await page.locator('script[type="application/ld+json"]').textContent()
     expect(JSON.parse(graph!)['@graph'][0].jobTitle).toBe(role)
