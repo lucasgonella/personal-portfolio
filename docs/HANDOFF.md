@@ -1,16 +1,46 @@
 # Handoff — Codex / Claude Code
 
-## Missão 02 — implementação pronta, release em preparação
+## Missão 02 — publicada e validada em 2026-11-13
 
-Pedido atual: evolução premium do portfólio e atualização de `lucasgonella/personal-portfolio`. Diagnóstico em `audit-mission02.md`; nova decisão em `decisions/missao02-posicionamento-e-jornada.md` no ai-memory `default / gonella-site-pessoal`.
+Site: https://gonella.com.br/ e https://gonella.com.br/gonella-portfolio-v1/en/. GitHub: https://github.com/lucasgonella/personal-portfolio, branch remota `main` atualizada por push normal, incluindo os commits do bootstrap antes locais. Branch de trabalho: `codex/bootstrap-and-portfolio-improvements`.
 
-Implementado: headline direta, experiência antes de laboratórios, especializações contextualizadas, decisões e referências públicas visíveis nos projetos, direção Platform além de DevOps/SRE, interação de quatro camadas no hero, oitavo nó de segurança e reset de perspectiva. App compõe seções extraídas; motion é opcional por preferência/viewport/economia de dados. Sem bibliotecas novas. Conteúdo PT/EN e identidades dos projetos preservados.
+- Implementação: `b1ebabc0314d5e258487f9622892ec0b48b2d39c`.
+- **Fonte final da aplicação publicada:** `940de9c0746f3b9ebc6d4c0b310b0a8cefc1750a`, alinhando metadados Platform PT/EN.
+- CI dessas duas revisões aprovado: [implementação](https://github.com/lucasgonella/personal-portfolio/actions/runs/43439525726) e [revisão publicada](https://github.com/lucasgonella/personal-portfolio/actions/runs/43440456628). Deploy foi feito localmente por FTP autorizado; o CI automático só validou.
+- Um commit documental posterior registra o relatório final, sem alterar JS/CSS/HTML publicados.
 
-Typecheck, lint e build passaram. Dez testes operacionais aprovados; suíte ampliada para 34 testes de navegador, incluindo novas interações e carregamento progressivo. Capturas desktop/mobile revisadas. Lighthouse local móvel mediu 99 em performance e 100 nas demais categorias; validação de produção desta missão ainda pendente.
+### Alterações e evidências
 
-Lucas confirmou explicitamente FTP convencional no escopo restrito e com backup. O publicador e os scripts de leitura exigem `LOCAWEB_ALLOW_PLAINTEXT_FTP=1` antes de qualquer login sem TLS. O workflow manual tem opt-in desmarcado por padrão. Não inferir autorização para outro deploy a partir do `.env`.
+Headline direta de infraestrutura, automação e confiabilidade; perfil e experiência antes dos laboratórios; especializações contextualizadas; direção DevOps/SRE/Platform distinta do cargo atual. Projetos priorizam competências transferíveis, exibem classificação, decisão e fonte pública, com validação/limites nos detalhes. Perfil profissional usa fatos fornecidos pelo proprietário; projetos pessoais não representam experiência em clientes.
 
-Próximo: confirmar testes finais, registrar revisão, atualizar GitHub sem force push, publicar manifesto após inventário/backup, validar FTP/HTTPS/34 testes e Lighthouse em produção. Não confundir os resultados históricos abaixo com o estado da release da missão 02. Pendências de migração de 13 eventos e sessão real Claude continuam registradas.
+Hero permite selecionar quatro camadas, com equivalência SVG/WebGL. Explorer tem oito nós, incluindo segurança, e reset de câmera. App compõe seções em `src/components/`; evidências em `src/engineering.ts`; motion opcional em `src/usePortfolioMotion.ts`. Foram removidas 18 regras CSS obsoletas, sem biblioteca nova. Preservados identidade, stack, URLs, contato, pré-renderização e funcionalidades anteriores.
+
+Typecheck, lint e build aprovados; **10 testes operacionais**, **34 testes de navegador locais e 34 em produção**, zero falhas/skips. Axe automatizado sem violações PT/EN; console e requisições sem erros nas capturas de inspeção. Cobertura inclui teclado, 320/768/1024/1440 px, sem JS/WebGL, perda de contexto, movimento reduzido, carregamento adiado, seleção e reset. A suite também passou em Linux no GitHub Actions.
+
+Lighthouse: performance **99 PT mobile / 100 desktop / 99 EN mobile**; demais categorias **100**. A primeira execução PT mobile foi 98, e a repetição final 99; JS/CSS não mudaram entre elas. CLS PT móvel ~0,000146, antes ~0,00827. Transferência JavaScript móvel observada caiu de 133.286 para 89.394 bytes (~33%). LCP PT observado ~2,01s; são dados de laboratório, sem INP/CrUX de campo. Resumo em [reports/mission02-validation.json](reports/mission02-validation.json), diagnóstico/antes-depois em [audit-mission02.md](audit-mission02.md).
+
+### Publicação e preservação
+
+Lucas confirmou explicitamente FTP convencional na porta 21 para este escopo e com backup. Scripts de deploy e reconhecimento agora exigem `LOCAWEB_ALLOW_PLAINTEXT_FTP=1` no ambiente antes do login sem TLS; workflow manual tem opt-in desmarcado por padrão. Uma credencial ou nota histórica não substitui a autorização atual.
+
+Primeiro envio: seis arquivos. Correção de metadados: dois (HTML PT e manifesto). Índice principal por último, zero exclusões. **16 artefatos conferidos por hash FTP e 15 arquivos públicos por HTTPS**, sem falhas. `img/` e duas aplicações irmãs somam nove arquivos, idênticos por hash ao primeiro inventário. `.env` original preservado byte a byte, não versionado/publicado; `.htaccess` da raiz preservado. Nenhum rollback real foi necessário.
+
+Estado atual de backup em `.deploy/backup/targets/`; inventário/manifesto/uploads/verificação em `.deploy/`. Backups anteriores, inclusive pré-missão, estão em `.deploy/releases/`. O rollback padrão volta ao estado anterior à última publicação; para voltar à revisão anterior à missão 02, revisar o archive apropriado. Não apagar ou sobrescrever evidências. Arquivos privados e relatórios completos são ignorados no Git.
+
+### Memória e pendências
+
+**13 páginas duráveis** em `default / gonella-site-pessoal`, com escritas MCP explícitas e controle de versão. Decisão da missão: `decisions/missao02-posicionamento-e-jornada.md`; problema de encoding: `gotchas/powershell-unicode.md`. Regras e procedimentos atualizados; índice em `working/estado-atual.md`.
+
+1. Persistem **13 eventos históricos pré-marker e a linha da sessão** no fallback `default / gonella.com.br`; migração exige administrador do mesmo servidor, após encerrar esta sessão. Dry-run anterior foi negado com 403; não houve mudança de permissões. Ver `ai-memory.md`.
+2. Configuração Claude existe, mas sessão real Claude ainda não foi validada. Não declarar essa integração testada.
+3. Auditoria atual: runtime sem vulnerabilidades; **11 moderadas no tooling de lint**. Tratar em tarefa específica, sem force fix/downgrade automático.
+4. Ao retomar, ler instruções, handoff, memória e Git real. Não recomeçar o site, nem repetir deploy sem novo build, testes, inventário e backup.
+
+### Falhas observadas e corrigidas
+
+Uma substituição temporária via pipeline PowerShell/Python perdeu acentos: `$OutputEncoding` era ASCII. A inspeção direta encontrou metadados Platform incompletos em PT; corrigidos com `apply_patch` e assertions de título/description nos dois idiomas. Não houve alteração global de encoding. O teste de ativação 3D foi ajustado para também funcionar em máquinas com menos núcleos, sem presumir autoativação de desktop.
+
+---
 
 ## Histórico da missão 01 — resultado em 2026-11-13
 

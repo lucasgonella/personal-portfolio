@@ -26,4 +26,45 @@ Projetos: README público de homelab e plataforma eleitoral reconsultados. A des
 
 Preservar React/TypeScript/Vite, Three.js, GSAP, fontes locais, identidade grafite/menta, URLs PT/EN, controles HTML e fallback SVG. Evoluir a composição editorial e a jornada para hero → perfil/experiência → especializações → projetos → homelab/explorer → contato. Mais evidência de sistemas, menos texto abstrato. Nenhum backend ou biblioteca de UI nova.
 
-Os testes, resultados reais, limitações e mudanças de decisão serão adicionados após execução. Este diagnóstico não encerra a missão.
+## Implementação e antes/depois
+
+| Antes | Depois |
+| --- | --- |
+| Headline abstrata e contexto profissional tardio | Infraestrutura, automação e confiabilidade no hero; atuação e experiência antes dos laboratórios |
+| Cards apoiados em ferramentas e detalhes escondidos | Classificação de escopo, decisão técnica e referência pública visíveis; validação e limites nos detalhes |
+| Objetivo DevOps/SRE | Direção DevOps/SRE/Platform separada do cargo atual em conteúdo e metadados PT/EN |
+| Hero essencialmente contemplativo | Quatro camadas selecionáveis, descrição contextual e destaque equivalente em SVG/WebGL |
+| Sete nós e câmera sem retorno explícito | Oito nós, incluindo segurança, e reset de perspectiva |
+| Importação opcional de motion em experiência estática | Motion não carregado inicialmente em mobile/reduced-motion/economia de dados |
+| App concentrando as seções | Componentes em `src/components/`, evidências em `src/engineering.ts` e hook de motion separado; 18 regras CSS obsoletas removidas |
+| Histórico do bootstrap apenas local | Histórico e implementação enviados à `main` do GitHub sem force push |
+
+Revisões: implementação `b1ebabc0314d5e258487f9622892ec0b48b2d39c`; correção de paridade dos metadados PT/EN `940de9c0746f3b9ebc6d4c0b310b0a8cefc1750a`, que é a fonte final publicada. Os testes passaram nos dois [runs de CI](https://github.com/lucasgonella/personal-portfolio/actions). Nenhuma biblioteca foi adicionada ou atualizada.
+
+## Testes e medições reais
+
+Typecheck, lint e build aprovados; dez testes operacionais e **34 testes Playwright/Edge locais e 34 em produção**, sem falhas ou skips. Axe automatizado sem violações nos dois idiomas. Verificados 320/768/1024/1440 px, teclado, navegação, links internos, SEO localizado, ausência de JS/WebGL, perda de contexto, seleção de camadas, segurança, reset e carregamento adiado. As capturas PT/EN em produção não apresentaram erros de console/página ou requisições falhas.
+
+| Perfil | Performance | Acessibilidade | Boas práticas | SEO | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| PT mobile, medição final | 99 | 100 | 100 | 100 | 0,000146 |
+| PT desktop | 100 | 100 | 100 | 100 | 0,000113 |
+| EN mobile | 99 | 100 | 100 | 100 | 0,000119 |
+
+Na primeira medição PT móvel, performance foi 98; a repetição final após ajuste somente de metadados foi 99. Não atribuir a oscilação ao título: JS e CSS não mudaram entre essas publicações. Baseline anterior da mesma interface pré-missão: 99/100/99 em performance e CLS PT móvel 0,00827. O LCP PT observado passou de aproximadamente 1,87s para 2,01s, com mais conteúdo; são execuções de laboratório, sem inferência de regressão ou melhoria de campo.
+
+O carregamento JavaScript no teste móvel passou de três scripts, **133.286 bytes transferidos**, para um script, **89.394 bytes**: cerca de 33% menos transferência. A fonte principal cresceu um pouco com a nova interação/conteúdo, mas os chunks opcionais de motion deixaram de ser baixados nesse contexto. Não há medição confiável de INP/CrUX de campo.
+
+## Publicação e preservação
+
+Primeira publicação: seis arquivos; alinhamento final de metadados: dois. Índice principal por último, zero exclusões. Todos os 16 artefatos do manifesto conferidos por hash FTP; 15 arquivos públicos conferidos por HTTPS. `img/` e as duas aplicações irmãs somam nove arquivos, com hashes idênticos ao primeiro inventário; `.htaccess` da raiz e `.env` original preservados. Backups/estados anteriores permanecem privados em `.deploy/backup/targets/` e `.deploy/releases/`. Não foi necessário executar rollback.
+
+O opt-in de FTP sem criptografia é exigido antes do login e foi autorizado explicitamente pelo proprietário nesta missão. Os scripts de reconhecimento compartilham a mesma conexão protegida; o workflow manual exige escolha explícita. O CI automático de push apenas validou, sem realizar deploy.
+
+## Limites e continuidade
+
+Auditoria atual das dependências de runtime: zero vulnerabilidades; auditoria completa: 11 moderadas em tooling de lint. Não foram aplicadas correções major/downgrades automáticos. A migração histórica dos 13 eventos pré-marker continua exigindo administrador; a sessão real Claude ainda não foi validada. Nenhuma memória de outro projeto foi alterada.
+
+Uma edição temporária via pipeline PowerShell/Python não preservou acentos porque `$OutputEncoding` era ASCII. A paridade de metadados incompleta foi detectada na inspeção direta, corrigida com `apply_patch` e coberta por assertions de título/description nas duas línguas. Não foram feitas mudanças globais de encoding.
+
+Resumo sanitizado: [reports/mission02-validation.json](reports/mission02-validation.json). Capturas antes, locais e de produção em `artifacts/mission02-*`; referências técnicas dos projetos foram revistas como código/documentação pública, sem executar operações ou testes na infraestrutura de outros projetos.

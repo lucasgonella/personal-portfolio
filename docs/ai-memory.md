@@ -13,12 +13,12 @@ Instalação WSL Ubuntu-24.04 preservada, cliente 3.1.1: seu `doctor` reconhece 
 | Namespace | Caminhos |
 | --- | --- |
 | `_rules/` | `seguranca-e-colaboracao.md` |
-| `decisions/` | `arquitetura-inicial.md`, `design-e-internacionalizacao.md`, `auditoria-e-intervencao-2026-11.md` |
+| `decisions/` | `arquitetura-inicial.md`, `design-e-internacionalizacao.md`, `auditoria-e-intervencao-2026-11.md`, `missao02-posicionamento-e-jornada.md` |
 | `procedures/` | `build-e-testes.md`, `deploy-backup-rollback.md`, `validacao-pos-deploy.md` |
-| `gotchas/` | `integracao-e-servidor.md`, `build-e-progressive-enhancement.md`, `eventos-anteriores-ao-marker.md` |
+| `gotchas/` | `integracao-e-servidor.md`, `build-e-progressive-enhancement.md`, `eventos-anteriores-ao-marker.md`, `powershell-unicode.md` |
 | `working/` | `estado-atual.md` |
 
-Onze páginas criadas via `memory_write_page`, todas iniciadas por H1. Atualizações posteriores usaram releitura e `expected_page_id`. Nenhum segredo foi incluído. O índice e o procedimento de deploy foram atualizados durante o trabalho, antes do encerramento.
+Treze páginas criadas via `memory_write_page` até a missão 02, todas iniciadas por H1. Atualizações posteriores usaram releitura e `expected_page_id`. Nenhum segredo foi incluído. O índice e o procedimento de deploy foram atualizados durante o trabalho, antes do encerramento. A missão 02 acrescentou decisão de jornada/posicionamento e um gotcha comprovado de Unicode no PowerShell; as demais páginas foram mantidas e atualizadas conforme necessário.
 
 ## Pendência retroativa de captura
 

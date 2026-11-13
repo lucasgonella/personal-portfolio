@@ -1,0 +1,328 @@
+{
+  "date": "2026-11-13",
+  "mission": 2,
+  "base_revision": "886b53dc3ef9ccc04777f4a7c28d9afe2107c91a",
+  "implementation_revision": "b1ebabc0314d5e258487f9622892ec0b48b2d39c",
+  "deployed_revision": "940de9c0746f3b9ebc6d4c0b310b0a8cefc1750a",
+  "github_main_updated": true,
+  "ci": [
+    {
+      "revision": "b1ebabc",
+      "run_id": 43439525726,
+      "conclusion": "success",
+      "url": "https://github.com/lucasgonella/personal-portfolio/actions/runs/43439525726"
+    },
+    {
+      "revision": "940de9c",
+      "run_id": 43440456628,
+      "conclusion": "success",
+      "url": "https://github.com/lucasgonella/personal-portfolio/actions/runs/43440456628"
+    }
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "operational_tests": 10,
+    "local_browser_tests": 34,
+    "production_browser_stats": {
+      "startTime": "2026-11-13T14:13:27.933Z",
+      "duration": 44449.941,
+      "expected": 34,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "axe_violations": 0,
+    "console_errors_in_spot_checks": 0,
+    "failed_requests_in_spot_checks": 0
+  },
+  "deployment": {
+    "first_uploads": 6,
+    "metadata_correction_uploads": 2,
+    "deleted": 0,
+    "manifest_files": 16,
+    "ftp_hashes_verified": true,
+    "https_files_verified": 15,
+    "https_failures": [],
+    "env_preserved": true,
+    "root_htaccess_modified": false,
+    "rollback_used": false,
+    "backup_present": true
+  },
+  "protected": {
+    "img": {
+      "unchanged": true,
+      "entries": 1,
+      "files": 1,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263",
+      "sha256_after": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263"
+    },
+    "gonella-dashboard": {
+      "unchanged": true,
+      "entries": 7,
+      "files": 5,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "f6fa2817cc70d2e0f96eda82c4a9b3b9a78495a2899ee4e64763ff074bb9234d",
+      "sha256_after": "f6fa2817cc70d2e0f96eda82c4a9b3b9a78495a2899ee4e64763ff074bb9234d"
+    },
+    "gonella-clips": {
+      "unchanged": true,
+      "entries": 4,
+      "files": 3,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "9ec0f0cf1b539676067af78c90d3b389c30b335e9009f841c314305ff457400d",
+      "sha256_after": "9ec0f0cf1b539676067af78c90d3b389c30b335e9009f841c314305ff457400d"
+    }
+  },
+  "lighthouse_baseline_same_pre_mission_ui": [
+    {
+      "profile": "pt-mobile",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1664.417,
+          "display": "1.7 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1868.917,
+          "display": "1.9 s"
+        },
+        "total-blocking-time": {
+          "value": 26,
+          "display": "30 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.008269264854180872,
+          "display": "0.008"
+        },
+        "speed-index": {
+          "value": 1664.417,
+          "display": "1.7 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:31.230Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "profile": "pt-desktop",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 375.616,
+          "display": "0.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 431.616,
+          "display": "0.4 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 5.204604493690366e-05,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 621.5181875395895,
+          "display": "0.6 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:43.307Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "profile": "en-mobile",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1375.48,
+          "display": "1.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1562.48,
+          "display": "1.6 s"
+        },
+        "total-blocking-time": {
+          "value": 12,
+          "display": "10 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.008046177835850288,
+          "display": "0.008"
+        },
+        "speed-index": {
+          "value": 1375.48,
+          "display": "1.4 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:55.821Z",
+      "lighthouse_version": "13.5.0"
+    }
+  ],
+  "lighthouse_mission02": [
+    {
+      "profile": "pt-mobile",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1669.4940000000001,
+          "display": "1.7 s"
+        },
+        "largest-contentful-paint": {
+          "value": 2012.9940000000001,
+          "display": "2.0 s"
+        },
+        "total-blocking-time": {
+          "value": 10.5,
+          "display": "10 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.0001456799285004217,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 1669.4940000000001,
+          "display": "1.7 s"
+        }
+      },
+      "fetch_time": "2026-11-13T14:14:15.320Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "profile": "pt-desktop",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 374.53200000000004,
+          "display": "0.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 430.03200000000004,
+          "display": "0.4 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.0001128893813481071,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 637.8581213347638,
+          "display": "0.6 s"
+        }
+      },
+      "fetch_time": "2026-11-13T14:08:31.446Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "profile": "en-mobile",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1382.7565,
+          "display": "1.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1719.2565,
+          "display": "1.7 s"
+        },
+        "total-blocking-time": {
+          "value": 17,
+          "display": "20 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.0001192944310222992,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 1382.7565,
+          "display": "1.4 s"
+        }
+      },
+      "fetch_time": "2026-11-13T14:08:43.778Z",
+      "lighthouse_version": "13.5.0"
+    }
+  ],
+  "lighthouse_note": "Three profiles measured after implementation; Portuguese mobile repeated after the metadata-only correction. JavaScript and CSS artifacts were identical across those two deployed revisions. Initial PT mobile performance was 98; final repeat was 99. Laboratory results, not field CWV.",
+  "mobile_javascript_before": {
+    "count": 3,
+    "resource_bytes": 389160,
+    "transfer_bytes": 133286
+  },
+  "mobile_javascript_after": {
+    "count": 1,
+    "resource_bytes": 283841,
+    "transfer_bytes": 89394
+  },
+  "audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 11,
+    "high": 0,
+    "critical": 0,
+    "total": 11
+  },
+  "runtime_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "memory": {
+    "workspace": "default",
+    "project": "gonella-site-pessoal",
+    "durable_pages": 13,
+    "new_decision": "decisions/missao02-posicionamento-e-jornada.md",
+    "new_gotcha": "gotchas/powershell-unicode.md"
+  },
+  "limits": [
+    "No field INP/CrUX measured.",
+    "11 moderate development-toolchain vulnerabilities remain; runtime audit is clean.",
+    "Historical migration of 13 pre-marker events still requires an ai-memory administrator.",
+    "Claude Code configuration exists; a real Claude session has not been validated.",
+    "Project-level infrastructure tests were reviewed through public code/documentation, not executed against other systems."
+  ]
+}

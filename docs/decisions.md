@@ -15,4 +15,4 @@
 | 2026-11-13 / missão 02 | Interação de quatro camadas no hero, segurança no explorer e reset de câmera | Geometria existente evoluída com equivalência SVG/HTML e sem biblioteca nova | `decisions/missao02-posicionamento-e-jornada.md` |
 | 2026-11-13 / missão 02 | Opt-in de FTP sem criptografia antes do login | Exigência explícita da missão; autorização do proprietário recebida e script recusa fallback sem variável de sessão | `decisions/missao02-posicionamento-e-jornada.md` |
 
-Páginas acima foram realmente persistidas via `memory_write_page` no escopo indicado. Relação das onze páginas e estado entre clientes em [ai-memory.md](ai-memory.md). Não confundir conhecimento histórico com autorização operacional. Adições e substituições de decisões devem incluir justificativa e evidência.
+Páginas acima foram realmente persistidas via `memory_write_page` no escopo indicado. Relação das treze páginas e estado entre clientes em [ai-memory.md](ai-memory.md). Não confundir conhecimento histórico com autorização operacional. Adições e substituições de decisões devem incluir justificativa e evidência.
