@@ -27,7 +27,7 @@ React 19.3.0, TypeScript 6.0.3, Vite 7.3.7, Three.js 0.186.1, GSAP 3.15.0 e CSS 
 
 PT-BR em `/`; EN em `/gonella-portfolio-v1/en/`. Preservar URLs, canonical, hreflang e paridade funcional/conteúdo. HTML pré-renderizado garante leitura sem JavaScript. Metadados GitHub são atualizados por script de build, sem chamadas contínuas no navegador.
 
-ai-memory: `.ai-memory.toml` define `default / gonella-site-pessoal`. MCP disponível e validado por escrita/releitura e `memory_status` com `resolved_by: explicit`. Cliente Windows 3.3.1, servidor MCP identificado como 3.3.0. WSL existente usa cliente 3.1.1 e outro servidor: não usar como rota equivalente. Hooks Codex/Claude Windows encontrados; cobertura efetiva depende de sessão real. `doctor` Windows exige privilégios administrativos que a credencial MCP não possui; não alterar permissões.
+ai-memory: `.ai-memory.toml` define `default / gonella-site-pessoal`. MCP disponível e validado por escrita/releitura e `memory_status` com `resolved_by: explicit`. Cliente Windows 3.3.1, servidor MCP identificado como 3.3.0. WSL existente usa cliente 3.1.1 e outro servidor: não usar como rota equivalente. Captura Codex real comprovada; Claude Code tem MCP e hooks no mesmo endpoint, ainda sem sessão real validada. Os 13 eventos anteriores à criação do marker e a linha desta sessão ficaram no fallback `default / gonella.com.br`: migração administrativa pendente, negada com 403 à credencial atual. `doctor` também requer operação administrativa. Não alterar permissões. Diagnóstico e procedimento em [ai-memory.md](ai-memory.md).
 
 ## Referências
 

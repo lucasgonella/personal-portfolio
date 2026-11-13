@@ -1,0 +1,299 @@
+{
+  "date": "2026-11-13",
+  "initial_revision": "5261cdf811f24ad0be50595cf74db988d9e2f85a",
+  "implementation_revision": "c11d6c8c752140829b007912d5e51af0c7ea07b8",
+  "deployed_revision": "d40a701875ed1fb1f678dea2c8fcc44e332877e5",
+  "branch": "codex/bootstrap-and-portfolio-improvements",
+  "source_pushed": false,
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "operational_tests_passed": 9,
+    "local_browser_tests_passed": 24,
+    "production_browser": {
+      "startTime": "2026-11-13T13:33:56.715Z",
+      "duration": 31580.066,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "automated_axe_violations": 0
+  },
+  "deployment": {
+    "protocol": "FTP",
+    "ftps_supported": false,
+    "first_upload_count": 6,
+    "correction_upload_count": 3,
+    "remote_deletions": 0,
+    "manifest_file_count": 16,
+    "ftp_verified": true,
+    "https_verified_files": 15,
+    "https_failures": [],
+    "backup_present": true,
+    "rollback_executed_in_production": false,
+    "manifest_sha256": "8680884585ab1a631fbb4a6bdd8bc2092aa9d7e051317afab9b4b677cede20fb"
+  },
+  "protected": {
+    "img": {
+      "unchanged": true,
+      "entries": 1,
+      "files": 1,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263",
+      "sha256_after": "f1ec15b173e7ab5b7dad76bb43cc183f453a6701b7b0550301d00f3136349263",
+      "unchanged_from_initial_inventory": true
+    },
+    "gonella-dashboard": {
+      "unchanged": true,
+      "entries": 7,
+      "files": 5,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "f6fa2817cc70d2e0f96eda82c4a9b3b9a78495a2899ee4e64763ff074bb9234d",
+      "sha256_after": "f6fa2817cc70d2e0f96eda82c4a9b3b9a78495a2899ee4e64763ff074bb9234d",
+      "unchanged_from_initial_inventory": true
+    },
+    "gonella-clips": {
+      "unchanged": true,
+      "entries": 4,
+      "files": 3,
+      "original_entries_preserved": true,
+      "modified_or_missing_original_entries": 0,
+      "added_entries": 0,
+      "sha256_before": "9ec0f0cf1b539676067af78c90d3b389c30b335e9009f841c314305ff457400d",
+      "sha256_after": "9ec0f0cf1b539676067af78c90d3b389c30b335e9009f841c314305ff457400d",
+      "unchanged_from_initial_inventory": true
+    }
+  },
+  "env_preserved": true,
+  "env_versioned": false,
+  "current_credential_matches_in_original_history": 0,
+  "historical_objects_checked": 100,
+  "lighthouse_before": [
+    {
+      "page": "pt-mobile",
+      "url": "https://gonella.com.br/",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1664.5115,
+          "display": "1.7 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1814.5115,
+          "display": "1.8 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 2.207145408262469e-05,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 1664.5115,
+          "display": "1.7 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:11:15.019Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "page": "pt-desktop",
+      "url": "https://gonella.com.br/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 382.883,
+          "display": "0.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 430.883,
+          "display": "0.4 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 5.204604493690366e-05,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 608.6470513385023,
+          "display": "0.6 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:11:26.758Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "page": "en-mobile",
+      "url": "https://gonella.com.br/gonella-portfolio-v1/en/",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1373.8719999999998,
+          "display": "1.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1577.3719999999998,
+          "display": "1.6 s"
+        },
+        "total-blocking-time": {
+          "value": 45,
+          "display": "50 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.009809740500260539,
+          "display": "0.01"
+        },
+        "speed-index": {
+          "value": 1392.402181867638,
+          "display": "1.4 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:11:38.771Z",
+      "lighthouse_version": "13.5.0"
+    }
+  ],
+  "lighthouse_final": [
+    {
+      "page": "pt-mobile",
+      "url": "https://gonella.com.br/",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1664.417,
+          "display": "1.7 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1868.917,
+          "display": "1.9 s"
+        },
+        "total-blocking-time": {
+          "value": 26,
+          "display": "30 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.008269264854180872,
+          "display": "0.008"
+        },
+        "speed-index": {
+          "value": 1664.417,
+          "display": "1.7 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:31.230Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "page": "pt-desktop",
+      "url": "https://gonella.com.br/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 375.616,
+          "display": "0.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 431.616,
+          "display": "0.4 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 5.204604493690366e-05,
+          "display": "0"
+        },
+        "speed-index": {
+          "value": 621.5181875395895,
+          "display": "0.6 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:43.307Z",
+      "lighthouse_version": "13.5.0"
+    },
+    {
+      "page": "en-mobile",
+      "url": "https://gonella.com.br/gonella-portfolio-v1/en/",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1375.48,
+          "display": "1.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1562.48,
+          "display": "1.6 s"
+        },
+        "total-blocking-time": {
+          "value": 12,
+          "display": "10 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.008046177835850288,
+          "display": "0.008"
+        },
+        "speed-index": {
+          "value": 1375.48,
+          "display": "1.4 s"
+        }
+      },
+      "fetch_time": "2026-11-13T13:34:55.821Z",
+      "lighthouse_version": "13.5.0"
+    }
+  ],
+  "pending": [
+    "Administrator must migrate 13 pre-marker events and the original session row from default/gonella.com.br; dry-run refused with HTTP 403.",
+    "Validate a real Claude Code session in the selected scope.",
+    "11 moderate lint-toolchain vulnerabilities remain; runtime audit is clean."
+  ],
+  "memory": {
+    "workspace": "default",
+    "project": "gonella-site-pessoal",
+    "durable_pages_created": 11,
+    "codex_capture_verified": true,
+    "claude_mcp_and_hooks_configured": true,
+    "claude_real_session_verified": false,
+    "pre_marker_events_pending_migration": 13
+  }
+}

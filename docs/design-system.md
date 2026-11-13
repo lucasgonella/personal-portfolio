@@ -20,4 +20,4 @@ Validar contraste, viewport móvel 320/390 px, desktop, PT/EN, teclado, moviment
 
 ## Evolução
 
-Não há redesign novo previamente aprovado. Auditar a implementação existente antes de escolher intervenções. Registrar mudanças realizadas e evidências em `decisions.md` e `HANDOFF.md`.
+Em novembro de 2026, a auditoria guiou uma evolução da identidade existente: cargo atual legível/localizado, bloco menta separado para direção de carreira e três caminhos editoriais para evidências técnicas. Cards de projetos, hero 3D e explorer foram preservados. O movimento responde à troca de preferência em runtime; ativação manual em reduced-motion inicia pausada. Detalhes e navegação permanecem acessíveis sem JavaScript. Ver `audit-2026-11.md`, `decisions.md` e `HANDOFF.md` para evidências.

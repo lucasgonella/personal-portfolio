@@ -1,32 +1,47 @@
 # Handoff — Codex / Claude Code
 
-## Situação em 2026-11-13 — implementação testada, antes do deploy
+## Resultado em 2026-11-13
 
-Pedido: inicializar colaboração e memória, auditar/melhorar portfólio existente, testar e publicar por FTP seguro. Bootstrap, auditoria e implementação concluídos; publicação e validação final ainda pendentes nesta revisão.
+Portfólio atualizado e validado em **https://gonella.com.br/** e **https://gonella.com.br/gonella-portfolio-v1/en/**. Bootstrap, auditoria, implementação, testes, deploy FTP e validação concluídos. Há pendências administrativas da memória e de validação entre clientes descritas abaixo; não declarar isolamento retroativo completo.
 
-Diretório iniciou apenas com `.env`. Fonte identificada por marcador FTP e recuperada de `lucasgonella/personal-portfolio`, com histórico e HEAD original `5261cdf811f24ad0be50595cf74db988d9e2f85a`. `.env` preservado, ignorado e não impresso. Branch `codex/bootstrap-and-portfolio-improvements`; ainda nenhuma escrita remota. Revisão da implementação será registrada no resultado da publicação.
+O diretório iniciou somente com `.env`. Fonte original recuperada pelo marcador FTP de `lucasgonella/personal-portfolio`, preservando histórico original `5261cdf811f24ad0be50595cf74db988d9e2f85a`. Branch local: `codex/bootstrap-and-portfolio-improvements`.
 
-## Concluído
+- `c11d6c8c752140829b007912d5e51af0c7ea07b8`: instruções, memória, documentação/papéis, melhorias de conteúdo, UX, acessibilidade/movimento, SEO e publicação segura.
+- `d40a701875ed1fb1f678dea2c8fcc44e332877e5`: **revisão de aplicação em produção**, corrigindo CLS móvel com detecção JS antes da pintura e teste de carregamento atrasado.
+- A documentação final de evidências é registrada em commit posterior, sem alterar a aplicação. Não houve push, merge ou execução de GitHub Actions; commits e branch permanecem locais.
 
-- Reconhecimento de stack, histórico, deploy, documentação e diretórios remotos.
-- `AGENTS.md`, `CLAUDE.md`, `.ai-memory.toml`, exclusões de segurança; documentação compartilhada e papéis de referência.
-- Sete páginas iniciais e duas páginas adicionais de auditoria/build persistidas por MCP em `default / gonella-site-pessoal`; escrita/releitura e scope explícito confirmados. Índice e procedimento operacional já atualizados com versão esperada.
-- Snapshot privado dos arquivos públicos principais com hashes em `.private/origin-2026-11-13/`.
-- Implementadas melhorias de conteúdo, UX, fallback sem JS, 3D/movimento e SEO localizado; detalhes e evidências em `audit-2026-11.md`.
-- Publicador lê `.env`, tenta FTPS, valida backup integral dos alvos, bloqueia concorrência e restaura PT/EN no rollback. Nove testes operacionais passaram.
-- Typecheck, lint, build e 22 testes Playwright/Edge passaram. Axe WCAG sem violações nos dois idiomas. Capturas revisadas em desktop/mobile.
-- Inventário FTP comprovou namespace e árvores protegidas; backup dos alvos em `.deploy/backup/targets/`. Repetição de inventário arquiva estado anterior em `.deploy/releases/`.
+## Entregas e arquivos
 
-## Riscos e pendências
+Instruções: `AGENTS.md`, `CLAUDE.md`, `.ai-memory.toml`; referências dos cinco papéis em `agents/roles/`. Documentação: `architecture.md`, `design-system.md`, `deploy-ftp.md`, `decisions.md`, `ROADMAP.md`, `audit-2026-11.md`, `ai-memory.md` e este handoff. README e documento histórico de deploy apontam para o processo vigente.
 
-- FTP não suporta FTPS; caminho do `.env` é de sistema, não caminho navegável da sessão FTP. `/public_html` comprovado.
-- Outros diretórios de aplicações são protegidos. Nunca modificar/remover.
-- Rollback ampliado foi testado em host simulado; não foi disparado desnecessariamente em produção.
-- Hooks Codex realmente capturam esta sessão (observações lidas via MCP). Claude global MCP HTTP e hooks estão configurados no mesmo endpoint local, mas sessão Claude real ainda não validada. Servidor WSL é diferente e foi preservado; `doctor` Windows requer operação root.
-- Node global 26.13.0 falhou por entropia OpenSSL; build aprovado com Node 24.22.3 oficial portátil em `.tools/node24/`, SHA-256 validado. `.nvmrc` fixa a versão; não há alteração global.
-- Auditoria runtime sem vulnerabilidades; auditoria completa mantém 11 moderadas em tooling de lint. Não aplicar force fix/downgrade automaticamente.
-- Relatórios em `docs/reports/` e docs originais são de outubro; não comprovam testes atuais.
+Aplicação: `src/App.tsx`, `content.ts`, `projects.ts`, `data/projects.json`, `SceneHost.tsx`, `main.tsx`, `styles.css`, `index.html` e `scripts/prerender.mjs`. Cargo atual/objetivo DevOps-SRE separados, caminhos para evidências de projetos, snapshot público atualizado, escopo do laboratório atribuído ao README, metadados localizados, conteúdo/navegação sem JS, reduced-motion dinâmico e ativação 3D pausada quando apropriado. Stack, URLs e identidade visual preservadas.
 
-## Próxima ação
+Operação: `scripts/ftp.py`, testes Node/Python/Playwright, workflow de retenção de backups, `.gitignore`, `.gitattributes`, `.nvmrc` e scripts de reconhecimento somente leitura. Publicador lê `.env`, prefere FTPS, valida todos os backups e manifesto, detecta concorrência e restaura PT/EN no rollback. Nenhuma dependência adicionada/atualizada.
 
-Registrar revisão, publicar manifesto já testado e inventariado; validar HTTP/FTP, navegador PT/EN e Lighthouse, confirmar preservação das árvores protegidas e concluir handoff. Não recomeçar do zero.
+## Evidências de qualidade
+
+- Typecheck, lint e build PT/EN aprovados com Node **24.22.3**, Python 3.13.14. Node 26 global falhou por entropia OpenSSL; portátil oficial em `.tools/node24/` validado por SHA-256 e ignorado, sem alteração global.
+- Nove testes operacionais aprovados: quatro Node e cinco Python; host compartilhado simulado, concorrência, backup corrompido, archive, isolamento e restauração PT/EN.
+- **24 testes Playwright/Edge locais e 24 em produção aprovados**, zero falhas/skips: idiomas, mobile 320 px, teclado, axe, sem JS/WebGL, perda de contexto, clipboard, movimento e header estável com módulo atrasado.
+- Lighthouse final: performance **99 PT mobile / 100 desktop / 99 EN mobile**; acessibilidade, boas práticas e SEO **100** nas três medições. CLS móvel final ~0,008; os dados são de laboratório, sem alegação de INP/CrUX.
+- Falhas observadas e corrigidas: precedência de camada CSS ocultando detalhes sem JS; CLS 0,065 na primeira publicação. Não reutilizar o relatório intermediário como resultado final.
+- Resumo sanitizado: [reports/validation-2026-11.json](reports/validation-2026-11.json). Relatórios completos/capturas locais em `artifacts/`; resultados históricos de outubro continuam distintos.
+
+## Deploy e preservação
+
+FTP porta 21, document root comprovado `/public_html`. FTPS rejeitado pelo servidor com AUTH não suportado. Não presumir que o caminho de sistema em `.env` é caminho navegável no FTP.
+
+Primeiro envio: seis arquivos. Correção: três (PT, EN e marcador). Índice principal sempre por último, zero exclusões. **16 artefatos conferidos por hash FTP**, **15 arquivos públicos verificados em HTTPS**, sem falhas; configuração Apache do namespace é verificada apenas por FTP.
+
+`img/` (um arquivo), dashboard (cinco) e aplicação irmã (três) conferem por hashes com o primeiro inventário; nenhum outro site foi modificado. Nenhuma alteração no `.htaccess` da raiz. `/estudos/` era 404 antes e permanece 404; não criar esse caminho por conveniência. `.env` preservado byte a byte, não rastreado e não publicado.
+
+Backups atuais: `.deploy/backup/targets/`. Inventário, manifesto, uploads e verificação: `.deploy/`. Estados anteriores e backup original: `.deploy/releases/`; snapshot extra: `.private/origin-2026-11-13/`. **Não sobrescrever/apagar esses estados antes de avaliar rollback.** O comando de rollback restaura o estado anterior ao último deploy; para voltar ao original de antes da missão, revisar o archive correspondente e seu manifesto. Nenhum rollback real foi necessário; a correção foi publicada pelo mesmo processo restrito.
+
+## Memória e próximos passos
+
+**Onze páginas duráveis** persistidas via MCP exclusivamente em `default / gonella-site-pessoal`; índice em `working/estado-atual.md`, lista em `ai-memory.md`. Atualizações com releitura e versão esperada. Hooks Codex realmente capturam os eventos atuais; Claude Code tem MCP e hooks configurados no mesmo endpoint. Instalação WSL preservada, com servidor distinto.
+
+1. **Administrador do mesmo ai-memory, após esta sessão terminar:** revisar e migrar a sessão `01a1d4fb-7b44-7532-ba6a-26f709e97efc` e seus 13 eventos iniciais do fallback `default / gonella.com.br`. O marker não existia no início. Dry-run foi negado com HTTP 403 root-only; nada foi movido/apagado e nenhuma permissão foi alterada. Procedimento em `ai-memory.md`.
+2. Validar uma nova sessão Codex e uma sessão real Claude Code iniciadas com o marker já presente. Não afirmar que Claude foi testado nesta tarefa.
+3. Tratar 11 vulnerabilidades moderadas em ferramentas de lint em tarefa específica. Auditoria runtime retornou zero; não usar force fix/downgrade automático.
+4. Quando houver nova mudança, ler instruções, este handoff, memória e Git real. Preservar a implementação; não recomeçar do zero. Não publicar novamente sem novo build, testes, inventário e backup.
