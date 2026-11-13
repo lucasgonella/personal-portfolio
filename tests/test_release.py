@@ -144,5 +144,21 @@ class ReleaseTests(unittest.TestCase):
             self.assertFalse(publisher.allowed(path))
 
 
+class TransportAuthorizationTests(unittest.TestCase):
+    def test_unsupported_tls_never_transmits_credentials_without_explicit_authorization(self):
+        from unittest.mock import MagicMock
+        connection = MagicMock()
+        connection.auth.side_effect = ftplib.error_perm('500 AUTH unsupported')
+        credentials = {'LOCAWEB_FTP_HOST': 'example.test', 'LOCAWEB_FTP_USER': 'test', 'LOCAWEB_FTP_PASSWORD': 'test'}
+        with patch.object(publisher, 'credentials', return_value=credentials), \
+             patch.object(publisher.ftplib, 'FTP_TLS', return_value=connection), \
+             patch.object(publisher.ftplib, 'FTP') as plaintext, \
+             patch.dict(publisher.os.environ, {}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, 'explicit authorization'):
+                publisher.connect()
+            connection.login.assert_not_called()
+            plaintext.assert_not_called()
+
+
 if __name__ == '__main__':
     unittest.main()

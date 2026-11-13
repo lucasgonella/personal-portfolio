@@ -8,7 +8,7 @@ CSS autoral em `src/styles.css`, com camadas reset/base/components/responsive. G
 
 ## Conteúdo, UI e 3D
 
-Fluxo existente: hero → abordagem → topologia explorável → projetos → trajetória → stack → contato. O cargo atual deve ser inequívoco, e o objetivo DevOps/SRE distinguido da experiência já comprovada. Projetos devem explicar problema, implementação e limites, sem métricas inventadas.
+Fluxo vigente após missão 02: hero → resumo de contexto → perfil/experiência → especializações → projetos → homelab/explorer → contato. O cargo atual é distinto da direção DevOps/SRE/Platform Engineering. Experiência corporativa informada pelo proprietário é separada de laboratórios, estudos e projeto independente. Projetos mostram uma decisão verificável e referência pública antes da expansão de detalhes.
 
 Hero 3D e topologia são representações conceituais. Fallback SVG imediato; controles HTML acessíveis equivalentes aos nós. Visuais de projetos e gráficos são demonstrativos, sem telemetria real. Nunca insinuar que animação representa produção ou uptime observado.
 
@@ -21,3 +21,5 @@ Validar contraste, viewport móvel 320/390 px, desktop, PT/EN, teclado, moviment
 ## Evolução
 
 Em novembro de 2026, a auditoria guiou uma evolução da identidade existente: cargo atual legível/localizado, bloco menta separado para direção de carreira e três caminhos editoriais para evidências técnicas. Cards de projetos, hero 3D e explorer foram preservados. O movimento responde à troca de preferência em runtime; ativação manual em reduced-motion inicia pausada. Detalhes e navegação permanecem acessíveis sem JavaScript. Ver `audit-2026-11.md`, `decisions.md` e `HANDOFF.md` para evidências.
+
+Na missão 02, a headline passou a comunicar infraestrutura, automação e confiabilidade diretamente. A hierarquia desktop usa títulos até 98px, com ajuste móvel entre 34px e 68px para preservar palavras completas. Uma faixa editorial separa atuação corporativa, prática pública e forma de trabalho, sem números ou indicadores operacionais fictícios. Controles do hero destacam quatro camadas e explicam sua função; oito nós do explorer conectam decisões a projetos, incluindo segurança. O motion de scroll é opcional em desktop e não é carregado inicialmente com reduced-motion ou economia de dados. Ver `audit-mission02.md`.

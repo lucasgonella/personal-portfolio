@@ -16,6 +16,11 @@ on:
         required: true
         default: false
         type: boolean
+      allow_plaintext_ftp:
+        description: 'Explicitly authorize unencrypted FTP if this server rejects FTPS'
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -71,6 +76,7 @@ jobs:
           LOCAWEB_FTP_USER: ${{ secrets.LOCAWEB_FTP_USER }}
           LOCAWEB_FTP_PASSWORD: ${{ secrets.LOCAWEB_FTP_PASSWORD }}
           LOCAWEB_FTP_PORT: ${{ secrets.LOCAWEB_FTP_PORT }}
+          LOCAWEB_ALLOW_PLAINTEXT_FTP: ${{ inputs.allow_plaintext_ftp && '1' || '0' }}
         run: |
           python scripts/ftp.py inventory
           python scripts/ftp.py deploy
@@ -86,6 +92,7 @@ jobs:
           LOCAWEB_FTP_USER: ${{ secrets.LOCAWEB_FTP_USER }}
           LOCAWEB_FTP_PASSWORD: ${{ secrets.LOCAWEB_FTP_PASSWORD }}
           LOCAWEB_FTP_PORT: ${{ secrets.LOCAWEB_FTP_PORT }}
+          LOCAWEB_ALLOW_PLAINTEXT_FTP: ${{ inputs.allow_plaintext_ftp && '1' || '0' }}
         run: |
           if ! python scripts/verify-http.py || ! npm run test:e2e; then
             python scripts/ftp.py rollback

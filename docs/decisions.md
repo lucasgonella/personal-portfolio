@@ -11,5 +11,8 @@
 | 2026-11-13 | Refinar a identidade existente e clareza para recrutamento | Cargo atual separado do objetivo DevOps/SRE, caminhos para evidências e conteúdo de laboratório atualizado com atribuição | `decisions/auditoria-e-intervencao-2026-11.md` |
 | 2026-11-13 | Corrigir CLS detectado depois da primeira publicação | Detecção de JavaScript no head evita recolhimento tardio da navegação; teste com módulo atrasado preserva fallback sem JS | `gotchas/build-e-progressive-enhancement.md` |
 | 2026-11-13 | Manter pendente a migração de eventos anteriores ao marker | 13 eventos no fallback; dry-run de migração negado por HTTP 403 root-only. Não contornar permissões | `gotchas/eventos-anteriores-ao-marker.md` |
+| 2026-11-13 / missão 02 | Perfil e experiência antes do laboratório; decisões dos projetos visíveis | Comunica senioridade em 30 segundos e diferencia trabalho corporativo de prática pública; preserva stack/URLs | `decisions/missao02-posicionamento-e-jornada.md` |
+| 2026-11-13 / missão 02 | Interação de quatro camadas no hero, segurança no explorer e reset de câmera | Geometria existente evoluída com equivalência SVG/HTML e sem biblioteca nova | `decisions/missao02-posicionamento-e-jornada.md` |
+| 2026-11-13 / missão 02 | Opt-in de FTP sem criptografia antes do login | Exigência explícita da missão; autorização do proprietário recebida e script recusa fallback sem variável de sessão | `decisions/missao02-posicionamento-e-jornada.md` |
 
 Páginas acima foram realmente persistidas via `memory_write_page` no escopo indicado. Relação das onze páginas e estado entre clientes em [ai-memory.md](ai-memory.md). Não confundir conhecimento histórico com autorização operacional. Adições e substituições de decisões devem incluir justificativa e evidência.

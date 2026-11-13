@@ -54,11 +54,12 @@ export default function SceneHost({ mode, locale, selected = 0, onSelect }: Prop
   useEffect(()=>{ pausedRef.current=paused; controller.current?.pause(paused) },[paused])
   const c=content[locale]
   return <div className={`scene-wrap scene-${mode} ${ready?'scene-ready':''}`}>
-    <div className="scene-static">{mode==='hero'?<CoreFallback/>:<ExplorerFallback selected={selected} onSelect={n=>onSelect?.(n)} labels={nodes.map(n=>n.label[locale])}/>}</div>
+    <div className="scene-static">{mode==='hero'?<CoreFallback selected={selected}/>:<ExplorerFallback selected={selected} onSelect={n=>onSelect?.(n)} labels={nodes.map(n=>n.label[locale])}/>}</div>
     <div ref={host} className="webgl-host" role="img" aria-label={mode==='hero'?c.sceneLabel:`Infrastructure Explorer — ${c.concept}`} />
     <div className="scene-controls">
       {!requested && !canAuto && <button className="scene-button" onClick={()=>setRequested(true)}>{c.activate}<span aria-hidden="true"> ↗</span></button>}
       {ready && <button className="scene-button" onClick={()=>setPaused(!paused)} aria-pressed={paused}><span aria-hidden="true">{paused?'▷':'Ⅱ'}</span> {paused?c.resume:c.pause}</button>}
+      {ready && mode==='explorer' && <button className="scene-button" onClick={()=>controller.current?.reset()}>{c.resetView}<span aria-hidden="true"> ↺</span></button>}
       {failed && <span className="scene-fallback-note">{c.concept} · SVG</span>}
     </div>
   </div>

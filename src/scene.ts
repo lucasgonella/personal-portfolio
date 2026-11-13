@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { nodes } from './content'
 
-export type SceneController = { dispose: () => void; select: (index:number) => void; pause: (paused:boolean) => void }
+export type SceneController = { dispose: () => void; select: (index:number) => void; pause: (paused:boolean) => void; reset: () => void }
 
 export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', onSelect:(index:number)=>void, onFailure:()=>void, labels:string[]): Promise<SceneController> {
   const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'})
@@ -29,6 +29,8 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   const camera=new THREE.OrthographicCamera(-extent*aspect,extent*aspect,extent,-extent,.1,70)
   camera.position.set(mode==='hero'?6.3:6,mode==='hero'?4.7:7.4,mode==='hero'?7.5:8)
   camera.lookAt(0,0,0)
+  const initialCamera = camera.position.clone()
+  const layerMaterials: THREE.MeshStandardMaterial[] = []
   const model=new THREE.Group()
   scene.add(model)
   const dark=new THREE.MeshStandardMaterial({color:'#30433b',roughness:.26,metalness:.5})
@@ -74,12 +76,13 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   if(mode==='hero'){
     model.rotation.y=-.2
     for(let layer=0;layer<4;layer++){
+      const layerMaterial=dark.clone();layerMaterials.push(layerMaterial);disposables.add(layerMaterial)
       const group=new THREE.Group()
       group.position.y=(layer-1.5)*.85
       layers.push(group);model.add(group)
       for(let x=0;x<3;x++)for(let z=0;z<3;z++){
         if(x===1&&z===1)continue
-        const mesh=box(group,.84,.29,.84,(x-1)*.89,0,(z-1)*.89,dark)
+        const mesh=box(group,.84,.29,.84,(x-1)*.89,0,(z-1)*.89,layerMaterial)
         edge(mesh)
         const chip=box(group,.6,.018,.6,(x-1)*.89,.155,(z-1)*.89,side)
         edge(chip)
@@ -219,19 +222,21 @@ export async function createScene(host: HTMLElement, mode: 'hero'|'explorer', on
   function start(){cancelAnimationFrame(frame);frame=requestAnimationFrame(animate)}
   function select(index:number){
     selected=index
+    layerMaterials.forEach((mat,i)=>{mat.emissive.set(i===index?'#235e4a':'#000000');mat.emissiveIntensity=.45})
     nodeMaterials.forEach((mat,i)=>{mat.color.set(i===index?'#537761':'#30433b');mat.emissive.set(i===index?'#163523':'#000000');mat.emissiveIntensity=.4})
     labelMaterials.forEach((mat,i)=>mat.color.set(i===index?'#b6f4da':'#a4b3a7'))
     connections.forEach((line,i)=>{(line.material as THREE.LineBasicMaterial).opacity=index===0||index===i+1?.65:.2})
     render(last)
   }
   // Camera interaction remains available while ambient animation is paused.
-  controls?.addEventListener('change',()=>{if(paused)render(last)})
+  controls?.addEventListener('change',()=>{if(paused)renderer.render(scene,camera)})
   await renderer.compileAsync(scene,camera)
   compiled=true
   resize()
   render(0);select(0);start()
   return {
     select,
+    reset(){pointerX=pointerY=0;camera.position.copy(initialCamera);camera.lookAt(0,0,0);if(controls){controls.target.set(0,0,0);controls.update()}render(last)},
     pause(value){paused=value;if(paused){cancelAnimationFrame(frame);render(last)}else if(visible)start()},
     dispose(){disposed=true;cancelAnimationFrame(frame);resizer.disconnect();observer.disconnect();timer.dispose();controls?.dispose();document.removeEventListener('visibilitychange',visibility);host.removeEventListener('pointermove',pointer);host.removeEventListener('pointerleave',pointerLeave);renderer.domElement.removeEventListener('pointerdown',down);renderer.domElement.removeEventListener('pointerup',click);renderer.domElement.removeEventListener('webglcontextlost',loss);disposables.forEach(item=>item.dispose());renderer.dispose();renderer.domElement.remove()},
   }

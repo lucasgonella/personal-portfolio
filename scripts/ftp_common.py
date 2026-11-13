@@ -1,8 +1,11 @@
 """Shared FTP connection and read-only origin inventory; credentials stay local."""
-from ftplib import FTP_TLS, FTP, error_perm
+from ftplib import FTP_TLS, error_perm
 from pathlib import Path
 import json
-import ssl
+if __package__:
+    from .ftp import connect as authorized_connection
+else:
+    from ftp import connect as authorized_connection
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,20 +19,7 @@ def config():
 
 def connect(remote=None):
     env = config()
-    ftp = FTP_TLS(context=ssl.create_default_context(), timeout=25)
-    ftp.connect(env['LOCAWEB_FTP_HOST'], int(env.get('LOCAWEB_FTP_PORT', 21)))
-    try:
-        ftp.auth()
-    except error_perm as exc:
-        if not str(exc).startswith(('500', '502')):
-            raise
-        ftp.close()
-        # FTP is explicitly authorized; this host rejects the AUTH extension.
-        ftp = FTP(timeout=25)
-        ftp.connect(env['LOCAWEB_FTP_HOST'], int(env.get('LOCAWEB_FTP_PORT', 21)))
-    ftp.login(env['LOCAWEB_FTP_USER'], env['LOCAWEB_FTP_PASSWORD'])
-    if isinstance(ftp, FTP_TLS):
-        ftp.prot_p()
+    ftp = authorized_connection()
     configured = remote if remote is not None else env['LOCAWEB_FTP_ROOT_FOLDER']
     try:
         ftp.cwd(configured)

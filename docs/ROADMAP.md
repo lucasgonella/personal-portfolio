@@ -12,5 +12,7 @@
 | P1 | Migrar 13 eventos iniciais e linha da sessão do escopo provisório | Pendente: administrador do mesmo ai-memory após encerrar sessão; dry-run negado com 403 |
 | P1 | Validar sessão Claude Code real e captura no escopo correto | Precisa execução real desse cliente; MCP Codex já validado |
 | P2 | Resolver 11 vulnerabilidades moderadas de ferramentas de lint | Tarefa separada; runtime auditado sem vulnerabilidades; evitar force fix/downgrade automático |
+| P0 / missão 02 | Jornada e posicionamento de engenharia, projetos com evidência e interação de camadas | Implementado; testes ampliados; release e validação de produção em preparação |
+| P0 / missão 02 | Atualizar GitHub do portfólio com histórico e nova implementação | Autorizado pelo proprietário; push normal após testes |
 
 Não apresentar ideias, planos de laboratório ou roadmap de repositórios como resultados entregues.

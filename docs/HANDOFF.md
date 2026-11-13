@@ -1,6 +1,18 @@
 # Handoff — Codex / Claude Code
 
-## Resultado em 2026-11-13
+## Missão 02 — implementação pronta, release em preparação
+
+Pedido atual: evolução premium do portfólio e atualização de `lucasgonella/personal-portfolio`. Diagnóstico em `audit-mission02.md`; nova decisão em `decisions/missao02-posicionamento-e-jornada.md` no ai-memory `default / gonella-site-pessoal`.
+
+Implementado: headline direta, experiência antes de laboratórios, especializações contextualizadas, decisões e referências públicas visíveis nos projetos, direção Platform além de DevOps/SRE, interação de quatro camadas no hero, oitavo nó de segurança e reset de perspectiva. App compõe seções extraídas; motion é opcional por preferência/viewport/economia de dados. Sem bibliotecas novas. Conteúdo PT/EN e identidades dos projetos preservados.
+
+Typecheck, lint e build passaram. Dez testes operacionais aprovados; suíte ampliada para 34 testes de navegador, incluindo novas interações e carregamento progressivo. Capturas desktop/mobile revisadas. Lighthouse local móvel mediu 99 em performance e 100 nas demais categorias; validação de produção desta missão ainda pendente.
+
+Lucas confirmou explicitamente FTP convencional no escopo restrito e com backup. O publicador e os scripts de leitura exigem `LOCAWEB_ALLOW_PLAINTEXT_FTP=1` antes de qualquer login sem TLS. O workflow manual tem opt-in desmarcado por padrão. Não inferir autorização para outro deploy a partir do `.env`.
+
+Próximo: confirmar testes finais, registrar revisão, atualizar GitHub sem force push, publicar manifesto após inventário/backup, validar FTP/HTTPS/34 testes e Lighthouse em produção. Não confundir os resultados históricos abaixo com o estado da release da missão 02. Pendências de migração de 13 eventos e sessão real Claude continuam registradas.
+
+## Histórico da missão 01 — resultado em 2026-11-13
 
 Portfólio atualizado e validado em **https://gonella.com.br/** e **https://gonella.com.br/gonella-portfolio-v1/en/**. Bootstrap, auditoria, implementação, testes, deploy FTP e validação concluídos. Há pendências administrativas da memória e de validação entre clientes descritas abaixo; não declarar isolamento retroativo completo.
 

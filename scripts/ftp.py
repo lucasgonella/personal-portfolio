@@ -52,6 +52,8 @@ def connect():
             ftp.close()
             raise RuntimeError('FTPS authentication failed; no plaintext fallback performed') from None
         ftp.close()
+        if os.environ.get('LOCAWEB_ALLOW_PLAINTEXT_FTP') != '1':
+            raise RuntimeError('FTPS is unsupported; explicit authorization is required before plaintext FTP login. Set LOCAWEB_ALLOW_PLAINTEXT_FTP=1 only for an authorized operation.')
         ftp = ftplib.FTP(timeout=60)
         ftp.connect(c['LOCAWEB_FTP_HOST'], 21)
     ftp.login(c['LOCAWEB_FTP_USER'], c['LOCAWEB_FTP_PASSWORD'])

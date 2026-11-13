@@ -4,7 +4,7 @@
 
 - Site: https://gonella.com.br/; proprietário: Lucas Gonella.
 - Profissão atual confirmada pelo proprietário: Analista de Infraestrutura Sênior.
-- Objetivo profissional: DevOps Engineer / Site Reliability Engineer.
+- Objetivo profissional: DevOps Engineer / Site Reliability Engineer / Platform Engineer.
 - Finalidade: portfólio técnico, personal branding e oportunidades profissionais.
 - Codex e Claude Code seguem estas mesmas regras. `CLAUDE.md` apenas aponta para este arquivo.
 
@@ -15,6 +15,7 @@ Preservar funcionalidades existentes; verificar o código e a produção antes d
 ## Produção — regras obrigatórias para todos os papéis
 
 - Publicar exclusivamente por FTP/FTPS conforme configuração local autorizada. Preferir FTPS com certificado validado quando suportado.
+- FTP sem criptografia exige autorização específica do proprietário antes de transmitir credenciais. O publicador deve exigir `LOCAWEB_ALLOW_PLAINTEXT_FTP=1` no ambiente; a presença de credenciais e uma autorização histórica não substituem a verificação do pedido atual.
 - Credenciais estão no `.env` local: nunca imprimi-las, registrá-las em memória, logs, argumentos de processo ou documentação, nem versioná-las.
 - Nunca enviar `.env`, `.git`, documentação interna, memórias, backups ou credenciais para produção. Publicar somente uma lista explícita de artefatos públicos.
 - Nunca presumir que a raiz FTP pertence integralmente ao portfólio. Verificar diretório remoto, identidade do site e lista exata de arquivos antes de cada deploy.

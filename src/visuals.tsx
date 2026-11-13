@@ -11,7 +11,7 @@ export function Glyph({ type = 0 }: { type?: number }) {
   return <svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={paths[type % paths.length]} stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>
 }
 
-export function CoreFallback() {
+export function CoreFallback({ selected = 3 }: { selected?: number }) {
   const id = useId().replace(/:/g, '')
   return <svg className="core-fallback" viewBox="0 0 680 660" aria-hidden="true">
     <defs>
@@ -25,11 +25,11 @@ export function CoreFallback() {
       {Array.from({length:9},(_,i)=><path key={i} d={`M${80+i*32} ${450-i*17}l285 155M${100+i*32} ${606-i*17}l285-155`}/>)}
     </g>
     {[3,2,1,0].map(layer => <g key={layer} className={`fallback-layer layer-${layer}`} transform={`translate(0 ${layer*81})`}>
-      <polygon points="337,81 523,181 337,282 151,181" fill={`url(#${id}-top)`} stroke="#738781" strokeOpacity=".45"/>
+      <polygon points="337,81 523,181 337,282 151,181" fill={`url(#${id}-top)`} stroke={selected===3-layer?'#b6f4da':'#738781'} strokeOpacity={selected===3-layer?.9:.45}/>
       <polygon points="151,181 337,282 337,320 151,219" fill={`url(#${id}-front)`} stroke="#273b3e"/>
       <polygon points="337,282 523,181 523,219 337,320" fill={`url(#${id}-side)`} stroke="#2c4145"/>
       <polygon points="337,135 423,181 337,228 251,181" fill="#0c1316" stroke="#4d6c68" strokeWidth="1"/>
-      <polygon points="337,149 401,183 337,217 273,183" fill={layer===0?'#a9f5db':'#1e4742'} opacity={layer===0?.6:.8}/>
+      <polygon points="337,149 401,183 337,217 273,183" fill={selected===3-layer?'#a9f5db':'#1e4742'} opacity={selected===3-layer?.6:.8}/>
       <path d="M170 191l145 79m43 0 145-79" fill="none" stroke={layer===1?'#afa8ef':'#a1f8de'} strokeWidth="2" opacity=".8"/>
       <g stroke="#6d827d" strokeWidth=".8" opacity=".6"><path d="m198 158 186 101m-140-125 186 101m-47-101-186 101m140-125-186 101"/></g>
       {[0,1,2,3,4].map(j=><path key={j} d={`M${175+j*25} ${210+j*13.5}l14 7.5`} stroke="#324748" strokeWidth="4"/>)}
@@ -40,7 +40,7 @@ export function CoreFallback() {
 }
 
 export function ExplorerFallback({ selected, onSelect, labels }: { selected: number; onSelect: (n: number) => void; labels: string[] }) {
-  const positions = [[320,225],[147,143],[495,142],[125,319],[517,320],[321,70],[320,395]]
+  const positions = [[320,225],[147,143],[495,142],[125,319],[517,320],[321,70],[320,395],[570,225]]
   return <svg className="explorer-fallback" viewBox="0 0 640 460" aria-hidden="true">
     <g stroke="#354440" strokeWidth=".7" opacity=".4">{Array.from({length:14},(_,i)=><path key={i} d={`M${i*50-160} 40l520 340m-520 0 520-340`}/>)}</g>
     {positions.slice(1).map(([x,y],i)=><path key={i} d={`M320 225 ${x} ${y}`} stroke={selected===i+1?'#baf4dc':'#3d5650'} strokeWidth={selected===i+1?2:1} strokeDasharray="4 5" className="network-link"/>) }

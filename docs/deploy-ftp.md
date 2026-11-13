@@ -18,6 +18,8 @@ O marcador `gonella-portfolio-v1/ownership.json` identifica este site e `lucasgo
 
 Scripts: `npm run deploy:inventory`, `npm run deploy`, `npm run deploy:verify`, `npm run rollback`, `python scripts/verify-http.py`. O build deve preceder o inventário. A publicação lê `.env` e o arquivo legado `.secrets/ftp.env`, com precedência das variáveis de ambiente. Tenta FTPS com certificado validado; recorre ao FTP autorizado somente se o servidor rejeitar a extensão com 500/502. Falha de certificado ou de autenticação não autoriza fallback.
 
+**A partir da missão 02, o fallback também exige `LOCAWEB_ALLOW_PLAINTEXT_FTP=1` no ambiente do processo**, após autorização específica do proprietário. Sem isso, a operação encerra antes do login FTP. Não colocar o opt-in no `.env` nem interpretar credenciais como autorização. Lucas confirmou explicitamente o uso restrito de FTP convencional na missão 02. O workflow manual oferece `allow_plaintext_ftp`, desmarcado por padrão; precisa de escolha explícita. Scripts de reconhecimento compartilham a mesma conexão protegida.
+
 O inventário copia todos os alvos existentes para `.deploy/backup/targets/<caminho>` e armazena os hashes em `inventory.json`. Repetir inventário arquiva o estado anterior em `.deploy/releases/<timestamp>/`. O deploy valida todos os backups antes da primeira escrita, trava o manifesto por hash e compara os arquivos remotos no preflight e imediatamente antes de cada transferência. Arquivos com hash idêntico são preservados sem transferência. O rollback restaura todos os alvos anteriores alterados, incluindo EN, configuração local do namespace e marcador, com índice principal por último. Backups são todos validados antes de iniciar a restauração.
 
 ## Estado privado e evidências
