@@ -63,8 +63,9 @@ test('WebGL works when requested and context loss restores static art',async({pa
   await page.locator('.scene-hero').getByRole('button',{name:'Ativar experiência 3D'}).click()
   await expect(page.locator('.scene-hero canvas')).toBeVisible({timeout:20000})
   await expect(page.locator('.scene-hero')).toHaveClass(/scene-ready/)
-  await page.locator('.scene-hero').getByRole('button',{name:'Pausar movimento'}).click()
   await expect(page.locator('.scene-hero').getByRole('button',{name:'Retomar movimento'})).toHaveAttribute('aria-pressed','true')
+  await page.locator('.scene-hero').getByRole('button',{name:'Retomar movimento'}).click()
+  await page.locator('.scene-hero').getByRole('button',{name:'Pausar movimento'}).click()
   await page.locator('.scene-hero canvas').evaluate(canvas=>canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true})))
   await expect(page.locator('.scene-hero')).not.toHaveClass(/scene-ready/)
   await expect(page.locator('.scene-hero .scene-fallback-note')).toBeVisible()
@@ -93,10 +94,55 @@ test('Static content and layout remain available without JavaScript',async({brow
   await page.goto(baseURL+'/')
   await expect(page.getByRole('heading',{level:1})).toContainText('Engenharia')
   await expect(page.getByRole('heading',{name:'Homelab como código'})).toBeVisible()
+  await expect(page.locator('#details-devops-sre-lab')).toBeVisible()
+  await expect(page.locator('#timeline-1')).toBeVisible()
+  await expect(page.locator('#primary-nav').getByRole('link',{name:'Contato',exact:true})).toBeVisible()
   await expect(page.locator('.hero')).toHaveCSS('position','relative')
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
   await page.getByRole('link',{name:'EN',exact:true}).click()
   await expect(page.locator('html')).toHaveAttribute('lang','en')
   await expect(page.getByRole('heading',{level:1})).toContainText('Engineering')
   await context.close()
+})
+
+test('Career direction, evidence links and localized SEO distinguish the current role',async({page})=>{
+  for(const [path,role] of [['/','Analista de Infraestrutura Sênior'],['/gonella-portfolio-v1/en/','Senior Infrastructure Analyst']]){
+    await page.goto(path)
+    await expect(page.locator('.hero-role')).toHaveText(role)
+    await expect(page.locator('.hero-goal')).toContainText('DevOps Engineer / Site Reliability Engineer')
+    const graph=await page.locator('script[type="application/ld+json"]').textContent()
+    expect(JSON.parse(graph!)['@graph'][0].jobTitle).toBe(role)
+    const destinations=await page.locator('.practice-grid > a').evaluateAll(links=>links.map(link=>link.getAttribute('href')))
+    expect(destinations).toHaveLength(3)
+    await page.locator('.practice-grid > a').nth(1).click()
+    await expect(page.locator('#details-devops-sre-lab')).toBeVisible()
+    await expect(page.locator('#details-devops-sre-lab')).toContainText('2026')
+    expect(await page.locator('link[rel="alternate"][hreflang]').count()).toBe(3)
+  }
+})
+
+test('Changing motion preference pauses active 3D and reverts scroll transforms',async({page,isMobile})=>{
+  await page.goto('/')
+  if(isMobile) await page.locator('.scene-hero').getByRole('button',{name:'Ativar experiência 3D'}).click()
+  await expect(page.locator('.scene-hero canvas')).toBeVisible({timeout:20000})
+  await page.emulateMedia({reducedMotion:'reduce'})
+  await expect(page.locator('.scene-hero').getByRole('button',{name:'Retomar movimento'})).toHaveAttribute('aria-pressed','true')
+  await expect(page.locator('.hero-art')).toHaveCSS('transform','none')
+})
+
+test('Denied clipboard access keeps the email action available',async({page})=>{
+  await page.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:()=>Promise.reject(new Error('denied'))}}))
+  await page.goto('/')
+  await page.getByRole('button',{name:'Copiar e-mail',exact:true}).click()
+  await expect(page.getByRole('status')).toContainText('Use o link de e-mail')
+  await expect(page.getByRole('link',{name:'Enviar um e-mail'})).toHaveAttribute('href','mailto:goonella@hotmail.com')
+})
+
+test('Small mobile viewport has readable career context and no horizontal overflow',async({page})=>{
+  await page.setViewportSize({width:320,height:740})
+  for(const path of ['/','/gonella-portfolio-v1/en/']){
+    await page.goto(path)
+    await expect(page.locator('.hero-goal')).toBeVisible()
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
+  }
 })

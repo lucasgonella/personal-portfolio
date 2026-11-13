@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-12T02:15:47.737Z",
+  "verifiedAt": "2026-11-13T13:11:21.015Z",
   "repositories": [
     {
       "name": "homelab-ansible",
@@ -23,16 +23,16 @@
       "languages": [
         "Python",
         "JavaScript",
-        "PHP",
-        "HTML",
         "CSS",
+        "HTML",
+        "PHP",
         "Shell",
         "PLpgSQL"
       ],
       "fork": false,
-      "updatedAt": "2026-10-12T00:42:57Z",
-      "lastCommitAt": "2026-10-12T00:42:53Z",
-      "lastCommit": "2599eae56ab3d016ca5c72cc757102c42afe6e0b"
+      "updatedAt": "2026-11-03T17:59:20Z",
+      "lastCommitAt": "2026-11-03T17:59:15Z",
+      "lastCommit": "938d0b13d2fbcc7d2335c20edddd72310137be24"
     },
     {
       "name": "devops-sre-lab",

@@ -10,7 +10,7 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src scripts/*.mjs tests vite.config.ts",
-    "test": "node --test tests/deploy.test.mjs",
+    "test": "node --test tests/deploy.test.mjs && python -m unittest discover -s tests -p test_*.py",
     "test:e2e": "playwright test",
     "refresh:projects": "node scripts/refresh-projects.mjs",
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir .deploy/ssr && node scripts/prerender.mjs && python scripts/ftp.py manifest",

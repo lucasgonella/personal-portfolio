@@ -9,7 +9,14 @@ export const links = {
 export const content = {
   pt: {
     skip: 'Pular para o conteúdo', nav: ['Explorer', 'Projetos', 'Sobre', 'Contato'], menu: 'Abrir navegação', close: 'Fechar navegação',
-    role: 'Senior Systems Administrator · Cloud · DevOps · SRE',
+    role: 'Analista de Infraestrutura Sênior',
+    careerLabel: 'PRÓXIMO PASSO', careerGoal: 'DevOps Engineer / Site Reliability Engineer',
+    practiceLabel: 'DA PRÁTICA AO CÓDIGO',
+    practices: [
+      { title: 'Configurar com consistência', text: 'Baseline Linux e configuração reproduzível com Ansible.', link: 'Explorar o homelab', repo: 'homelab-ansible' },
+      { title: 'Entregar com verificação', text: 'CI/CD por SHA, health checks e rollback documentado.', link: 'Explorar o laboratório DevOps', repo: 'devops-sre-lab' },
+      { title: 'Entender os sinais', text: 'Instrumentação e métricas em um laboratório de observabilidade.', link: 'Explorar a stack de métricas', repo: 'prometheus-grafana' },
+    ],
     hero: ['Engenharia', 'por trás do', 'que importa.'],
     intro: 'Sou Lucas Gonella. Construo, automatizo e mantenho a infraestrutura que transforma boas ideias em sistemas reais.',
     projectsCta: 'Explorar projetos', aboutCta: 'Minha trajetória', contactCta: 'Vamos conversar',
@@ -44,7 +51,14 @@ export const content = {
   },
   en: {
     skip: 'Skip to content', nav: ['Explorer', 'Projects', 'About', 'Contact'], menu: 'Open navigation', close: 'Close navigation',
-    role: 'Senior Systems Administrator · Cloud · DevOps · SRE',
+    role: 'Senior Infrastructure Analyst',
+    careerLabel: 'CAREER DIRECTION', careerGoal: 'DevOps Engineer / Site Reliability Engineer',
+    practiceLabel: 'FROM PRACTICE TO CODE',
+    practices: [
+      { title: 'Configure consistently', text: 'Linux baselines and repeatable configuration with Ansible.', link: 'Explore the homelab', repo: 'homelab-ansible' },
+      { title: 'Deliver with verification', text: 'SHA-based CI/CD, health checks and documented rollback.', link: 'Explore the DevOps lab', repo: 'devops-sre-lab' },
+      { title: 'Understand the signals', text: 'Instrumentation and metrics in an observability study lab.', link: 'Explore the metrics stack', repo: 'prometheus-grafana' },
+    ],
     hero: ['Engineering', 'behind what', 'matters.'],
     intro: 'I’m Lucas Gonella. I build, automate and maintain the infrastructure that turns good ideas into real systems.',
     projectsCta: 'Explore projects', aboutCta: 'My journey', contactCta: 'Let’s talk',

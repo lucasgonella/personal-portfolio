@@ -104,6 +104,7 @@ jobs:
             .deploy/backup/404.html
             .deploy/backup/ownership.json
             .deploy/backup/namespace-htaccess
+            .deploy/backup/targets/
             .deploy/inventory.json
             .deploy/manifest.json
             .deploy/verification.json

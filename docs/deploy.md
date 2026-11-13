@@ -1,5 +1,7 @@
 # Publicação FTP restrita e rollback
 
+> Registro histórico de outubro de 2026. O procedimento vigente, incluindo `.env`, tentativa FTPS e rollback integral de PT/EN, está em [deploy-ftp.md](deploy-ftp.md). Os caminhos e resultados abaixo descrevem a publicação histórica e não o inventário atual.
+
 ## Escopo
 
 Destino confirmado: FTP **porta 21**, raiz `/public_html`, correspondente ao document root solicitado. O primeiro inventário encontrou `index.html`, `img/` e `estudos/`. Não havia `.htaccess` listado. Não foi criado nem alterado `.htaccess`.

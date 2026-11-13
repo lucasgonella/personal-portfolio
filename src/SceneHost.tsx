@@ -13,21 +13,24 @@ export default function SceneHost({ mode, locale, selected = 0, onSelect }: Prop
   const [canAuto, setCanAuto] = useState(false)
   const [failed, setFailed] = useState(false)
   const callback = useRef(onSelect)
+  const pausedRef = useRef(paused)
   useEffect(()=>{ callback.current=onSelect },[onSelect])
   useEffect(()=>{
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
     const auto = !motion.matches && !connection?.saveData && window.innerWidth >= 768 && navigator.hardwareConcurrency >= 4
     setCanAuto(auto)
+    if(motion.matches) setPaused(true)
     const target = host.current
-    if (!target || !auto) return
-    let timer: ReturnType<typeof setTimeout>
-    const observer=new IntersectionObserver(entries=>{
-      if(entries[0].isIntersecting){ timer=setTimeout(()=>setRequested(true),mode==='hero'?1400:150); observer.disconnect() }
-    },{rootMargin:'100px'})
-    observer.observe(target)
     const onMotion=()=>{ if(motion.matches) { setPaused(true); controller.current?.pause(true) } }
     motion.addEventListener('change',onMotion)
+    let timer: ReturnType<typeof setTimeout>
+    const observer=new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting){ timer=setTimeout(()=>{
+        if(!motion.matches && !connection?.saveData) setRequested(true)
+      },mode==='hero'?1400:150); observer.disconnect() }
+    },{rootMargin:'100px'})
+    if(target && auto) observer.observe(target)
     return ()=>{ observer.disconnect(); clearTimeout(timer); motion.removeEventListener('change',onMotion) }
   },[mode])
   useEffect(()=>{
@@ -40,7 +43,7 @@ export default function SceneHost({ mode, locale, selected = 0, onSelect }: Prop
         if(cancelled){scene.dispose();return}
         controller.current=scene
         controller.current.select(selected)
-        controller.current.pause(paused)
+        controller.current.pause(pausedRef.current)
         setReady(true)
       } catch { setFailed(true) }
     }).catch(()=>setFailed(true))
@@ -48,7 +51,7 @@ export default function SceneHost({ mode, locale, selected = 0, onSelect }: Prop
     // The scene is created once. Selection and motion have their own update effects.
   },[requested,mode])
   useEffect(()=>{ controller.current?.select(selected) },[selected])
-  useEffect(()=>{ controller.current?.pause(paused) },[paused])
+  useEffect(()=>{ pausedRef.current=paused; controller.current?.pause(paused) },[paused])
   const c=content[locale]
   return <div className={`scene-wrap scene-${mode} ${ready?'scene-ready':''}`}>
     <div className="scene-static">{mode==='hero'?<CoreFallback/>:<ExplorerFallback selected={selected} onSelect={n=>onSelect?.(n)} labels={nodes.map(n=>n.label[locale])}/>}</div>

@@ -1,14 +1,27 @@
-.secrets/
-.tools/
-.deploy/
-node_modules/
-dist/
-test-results/
-playwright-report/
-artifacts/
+# Local credentials; never publish or version these files.
 .env
 .env.*
 !.env.example
-*.log
+*.pem
+*.key
+*.pfx
+*.p12
+credentials*.json
+# Private snapshots and operation evidence.
+.private/
+.tmp/
+backups/
+artifacts/
+node_modules/
+dist/
+playwright-report/
+test-results/
 __pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.secrets/
+.tools/
+.deploy/
+*.log
 .pytest_cache/

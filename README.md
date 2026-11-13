@@ -6,6 +6,8 @@ Produção: **https://gonella.com.br/** · Inglês: **https://gonella.com.br/gon
 
 ## Desenvolvimento
 
+Antes de trabalhar, leia [AGENTS.md](AGENTS.md), [handoff](docs/HANDOFF.md), [arquitetura](docs/architecture.md) e [decisões](docs/decisions.md). Codex e Claude Code compartilham as regras de produção. ai-memory: `default / gonella-site-pessoal`, definido em `.ai-memory.toml` e obrigatório explicitamente nas chamadas MCP.
+
 Requer Node.js 24 LTS e Python 3.13. Dependências têm versões fixas e lockfile.
 
 ```sh
@@ -56,7 +58,7 @@ São quinze chamadas por atualização para cinco repositórios, nunca chamadas 
 
 Leia [deploy e rollback](docs/deploy.md), [pesquisa de projetos](docs/project-research.md), [direção visual](docs/design.md) e [validação](docs/validation.md).
 
-FTP convencional na porta **21**, modo passivo e transferências binárias. Não usa SSH, SFTP, FTPS, mirror ou exclusão remota. `.secrets/ftp.env` permanece local, fora do Git.
+Publicação vigente: [deploy FTP seguro](docs/deploy-ftp.md). Porta **21**, modo passivo e transferências binárias. Tenta FTPS validado e usa FTP convencional autorizado somente quando AUTH não é suportado pelo servidor. Não usa SSH, SFTP, mirror ou exclusão remota. Credenciais em `.env` local/ambiente; `.secrets/ftp.env` legado continua compatível. Nunca publicar esses arquivos.
 
 GitHub Actions valida pushes e PRs. Publicação ocorre somente com `workflow_dispatch`, `deploy=true`, branch `main`. Os quatro secrets têm os nomes efetivamente encontrados no arquivo local:
 

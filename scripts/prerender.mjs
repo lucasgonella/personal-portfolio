@@ -27,7 +27,15 @@ for(const locale of ['pt','en']){
   let page=html.replace('<div id="root"></div>',`<div id="root">${render(locale)}</div>`)
   if(manrope)page=page.replace('<head>',`<head><link rel="preload" href="/gonella-portfolio-v1/${manrope}" as="font" type="font/woff2" crossorigin>`)
   page=page.replace(/<link rel="stylesheet"([^>]*href="([^"]+)"[^>]*)>/,(_,attributes,url)=>`<style data-portfolio-critical>${criticalCss}</style><link rel="stylesheet"${attributes} media="print" id="portfolio-css"><script>document.getElementById('portfolio-css').addEventListener('load',function(){this.media='all'})</script><noscript><link rel="stylesheet" href="${url}"></noscript>`)
+  graph['@graph'][0].jobTitle=locale==='pt'?'Analista de Infraestrutura Sênior':'Senior Infrastructure Analyst'
   page=page.replace('</head>',`<script type="application/ld+json">${JSON.stringify(graph).replace(/</g,'\\u003c')}</script></head>`)
+  const title=locale==='pt'?'Lucas Gonella — Infraestrutura Sênior | DevOps & SRE':'Lucas Gonella — Senior Infrastructure Analyst | DevOps & SRE'
+  const description=locale==='pt'?'Analista de Infraestrutura Sênior com foco de carreira em DevOps e SRE. Explore projetos públicos de automação, CI/CD e observabilidade.':'Senior Infrastructure Analyst pursuing DevOps and SRE roles. Explore public projects in automation, CI/CD and observability.'
+  page=page.replace(/<title>[^<]*<\/title>/,`<title>${title.replaceAll('&','&amp;')}</title>`)
+  page=page.replace(/(<meta name="description" content=")[^"]*("\s*\/?>)/,`$1${description}$2`)
+  page=page.replace(/(<meta property="og:title" content=")[^"]*("\s*\/?>)/,`$1${title.replaceAll('&','&amp;')}$2`)
+  page=page.replace(/(<meta property="og:description" content=")[^"]*("\s*\/?>)/,`$1${description}$2`)
+  page=page.replace('</head>',`<meta property="og:locale:alternate" content="${locale==='pt'?'en_US':'pt_BR'}" /></head>`)
   if(locale==='en'){
     page=page.replace('<html lang="pt-BR">','<html lang="en">')
     page=page.replace('<link rel="canonical" href="https://gonella.com.br/" />',`<link rel="canonical" href="${enUrl}" />`)

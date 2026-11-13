@@ -29,3 +29,50 @@
   @media(max-width:370px){:root{--gutter:20px}.site-header{padding:0 20px}.hero h1{font-size:49px}.hero-ctas{gap:16px}.hero-ctas .button{padding:15px 16px;gap:14px}.hero-ctas .text-link{font-size:9px}.hero-art{height:315px}.discipline-strip{padding:22px 20px;font-size:6px}.section-shell{padding-left:20px;padding-right:20px}.section-heading h2{font-size:35px}.statement h2{font-size:32px}.explorer-map{height:290px}.node-selector button{font-size:7px}.contact h2{font-size:37px}.contact-socials{gap:21px}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.hero-art,.project-card,.lab-platform{transform:none}.lab-platform{transform:translate(-50%,-48%) rotateX(48deg) rotateZ(-35deg)!important}}
 }
+
+/* November 2026: career context, evidence paths and progressive enhancement. */
+@layer components {
+  .hero { min-height: 850px; }
+  .hero-content { padding-top: 48px; }
+  .hero-role { font-size: 12px; color: var(--text); margin-bottom: 18px; }
+  .hero-goal { margin-top: 21px; padding-left: 13px; border-left: 2px solid var(--mint); }
+  .hero-goal > .mono { display: block; color: var(--muted); font-size: 8px; margin-bottom: 4px; }
+  .hero-goal > p { color: var(--mint); font-size: 12px; line-height: 1.6; max-width: 390px; }
+  .hero-ctas { margin-top: 25px; }
+  .practice-overview { grid-column: 1 / -1; margin-top: 38px; }
+  .practice-label { color: var(--muted); margin-bottom: 23px; font-size: 9px; }
+  .practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+  .practice-grid > a { display: flex; flex-direction: column; align-items: flex-start; padding: 30px 28px 8px 0; }
+  .practice-grid > a + a { border-left: 1px solid var(--line); padding-left: 28px; }
+  .practice-number { color: var(--mint); font-size: 9px; }
+  .practice-grid h3 { font-size: 24px; letter-spacing: -.04em; line-height: 1.3; margin: 18px 0 12px; }
+  .practice-grid p { font-size: 13px; margin: 0 0 24px; }
+  .practice-grid .text-link { margin-top: auto; font-size: 11px; color: var(--mint); min-height: 32px; }
+  .practice-grid > a:hover h3 { color: var(--mint); }
+}
+@layer responsive {
+  @media (min-width: 1500px) { .hero-content { padding-top: 70px; } }
+  @media (max-width: 1100px) { .hero-role { font-size: 11px; } }
+  @media (max-width: 767px) {
+    .hero { min-height: 0; }
+    .hero-content { padding-top: 30px; }
+    .hero-role { font-size: 11px; max-width: none; }
+    .hero-goal { margin-top: 19px; }
+    .hero-goal > p { font-size: 11px; }
+    .practice-overview { margin-top: 32px; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .practice-grid > a, .practice-grid > a + a { border-left: 0; border-bottom: 1px solid var(--line); padding: 24px 0; }
+    .practice-grid h3 { font-size: 25px; margin-top: 11px; }
+    .practice-grid p { font-size: 12px; margin-bottom: 15px; }
+  }
+}
+@layer reset {
+  html:not(.js) .project-details[hidden], html:not(.js) .timeline-item p[hidden] { display: block !important; }
+}
+html:not(.js) .scene-controls, html:not(.js) .menu-button, html:not(.js) .detail-trigger,
+html:not(.js) .copy-button, html:not(.js) .node-selector { display: none; }
+@media (max-width: 767px) {
+  html:not(.js) .site-header { height: auto; min-height: 70px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 12px; }
+  html:not(.js) .nav { display: flex; position: static; order: 3; width: 100%; padding: 5px 0 0; gap: 18px; border: 0; box-shadow: none; background: none; }
+  html:not(.js) .nav > a { font-size: 11px; border: 0; padding: 10px 0; }
+}

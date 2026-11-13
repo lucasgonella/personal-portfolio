@@ -9,6 +9,9 @@ import io
 import json
 import os
 import pathlib
+import re
+import shutil
+import ssl
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -22,13 +25,15 @@ OWNER_REPO = 'lucasgonella/personal-portfolio'
 
 def credentials():
     values = dict(os.environ)
-    env = ROOT / '.secrets/ftp.env'
-    if env.exists():
+    for env in (ROOT / '.secrets/ftp.env', ROOT / '.env'):
+      if env.exists():
         for line in env.read_text(encoding='utf-8-sig').splitlines():
             line = line.strip()
             if line and not line.startswith('#') and '=' in line:
                 key, value = line.split('=', 1)
-                values[key.strip()] = value.strip().strip('\"\'')
+                # Explicit environment configuration takes precedence over local files.
+                if key.strip() not in os.environ:
+                    values[key.strip()] = value.strip().strip('\"\'')
     required = ['LOCAWEB_FTP_HOST', 'LOCAWEB_FTP_USER', 'LOCAWEB_FTP_PASSWORD', 'LOCAWEB_FTP_PORT']
     if any(not values.get(key) for key in required):
         raise RuntimeError('Missing required LOCAWEB_FTP_* configuration')
@@ -38,9 +43,20 @@ def credentials():
 
 def connect():
     c = credentials()
-    ftp = ftplib.FTP(timeout=60)
+    ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=60)
     ftp.connect(c['LOCAWEB_FTP_HOST'], 21)
+    try:
+        ftp.auth()
+    except ftplib.error_perm as error:
+        if not str(error).startswith(('500', '502')):
+            ftp.close()
+            raise RuntimeError('FTPS authentication failed; no plaintext fallback performed') from None
+        ftp.close()
+        ftp = ftplib.FTP(timeout=60)
+        ftp.connect(c['LOCAWEB_FTP_HOST'], 21)
     ftp.login(c['LOCAWEB_FTP_USER'], c['LOCAWEB_FTP_PASSWORD'])
+    if isinstance(ftp, ftplib.FTP_TLS):
+        ftp.prot_p()
     ftp.set_pasv(True)
     return ftp
 
@@ -107,6 +123,20 @@ def protected_tree(ftp, prefix=''):
 
 def inventory():
     STATE.mkdir(exist_ok=True)
+    payload_path = STATE/'manifest.json'
+    if not payload_path.exists():
+        raise RuntimeError('Build the reviewed release before inventory')
+    payload = json.loads(payload_path.read_text(encoding='utf-8'))
+    validate_payload(payload)
+    if (STATE/'inventory.json').exists():
+        archive = STATE/'releases'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+        archive.mkdir(parents=True)
+        for name in ('inventory.json','backup','uploaded.json','owned.json','verification.json','rollback.json'):
+            source = STATE/name
+            if source.is_dir():
+                shutil.copytree(source, archive/name)
+            elif source.exists():
+                shutil.copy2(source, archive/name)
     with connect() as ftp:
         initial = ftp.pwd()
         root = document_root(ftp)
@@ -144,18 +174,56 @@ def inventory():
                 ftp.cwd(name)
                 report['protected'][name] = protected_tree(ftp)
                 ftp.cwd(root)
+        # Back up every existing target, including EN and namespace configuration.
+        previous = {f['path']:f['sha256'] for f in owner['files']} if report.get('ownership_verified') else {}
+        report['target_hashes'] = {}
+        report['manifest_sha256'] = sha(payload_path.read_bytes())
+        for f in payload['files']:
+            path = f['path']
+            try:
+                data = read(ftp,path)
+            except ftplib.error_perm as error:
+                if not str(error).startswith('550'):
+                    raise
+                report['target_hashes'][path] = None
+                continue
+            if path != OWNER_PATH and path != 'index.html' and path not in previous:
+                raise RuntimeError('Existing target ownership is unproved: '+path)
+            if path in previous and sha(data) != previous[path]:
+                raise RuntimeError('Existing target differs from ownership marker: '+path)
+            report['target_hashes'][path] = sha(data)
+            target = backup/'targets'/path
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(data)
         (STATE/'inventory.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
         print(json.dumps({'document_root':root,'entries':[{'name':e['name'],'type':e['type']} for e in listing], 'backed_up':[p.name for p in backup.iterdir()], 'estudos_files_hashed':len(report['protected'].get('estudos',[])), 'http_before':report['http_before']},ensure_ascii=False,indent=2))
 
 def allowed(path):
+    if not isinstance(path, str) or not re.fullmatch(r'[A-Za-z0-9_./-]+', path):
+        return False
     p = pathlib.PurePosixPath(path)
-    if p.is_absolute() or '..' in p.parts or '\\' in path:
+    if p.is_absolute() or '..' in p.parts or p.as_posix() != path or '\\' in path:
+        return False
+    if any(part.startswith('.') for part in p.parts) and path != NAMESPACE + '/.htaccess':
         return False
     return path in ROOT_ALLOWLIST or path in {NAMESPACE + '/en/index.html', NAMESPACE + '/.htaccess'} or (len(p.parts) >= 2 and p.parts[0] == NAMESPACE and p.suffix in {'.js','.css','.svg','.webp','.avif','.png','.woff2','.json','.glb'})
+
+def validate_payload(payload):
+    files = payload.get('files', [])
+    paths = [f.get('path') for f in files]
+    if payload.get('namespace') != NAMESPACE or not files or 'index.html' not in paths or OWNER_PATH not in paths:
+        raise RuntimeError('Release manifest is incomplete or has an invalid namespace')
+    if len(paths) != len(set(paths)):
+        raise RuntimeError('Duplicate release destinations are not allowed')
+    for f in files:
+        if not allowed(f.get('path')) or not re.fullmatch(r'[0-9a-f]{64}', str(f.get('sha256', ''))):
+            raise RuntimeError('Release contains an unsafe path or invalid checksum')
 
 def manifest():
     files = []
     for p in sorted((ROOT/'dist').rglob('*'),key=lambda p:p.relative_to(ROOT/'dist').as_posix()):
+        if p.is_symlink():
+            raise RuntimeError('Symbolic links are not allowed in release artifacts')
         if p.is_file():
             path = p.relative_to(ROOT/'dist').as_posix()
             if not allowed(path):
@@ -173,7 +241,9 @@ def manifest():
     (STATE/'manifest.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps({'files':len(files),'bytes':sum(f['bytes'] for f in files),'manifest':'.deploy/manifest.json'}))
 
-def transfer(path, data, root):
+def transfer(path, data, root, expected_hash='unverified'):
+    if not allowed(path) or not root.rstrip('/').endswith('/public_html'):
+        raise RuntimeError('Transfer destination is outside the authorized portfolio scope')
     for attempt in range(3):
         try:
             with connect() as ftp:
@@ -186,6 +256,17 @@ def transfer(path, data, root):
                     except ftplib.error_perm:
                         ftp.mkd(current)
                         ftp.cwd(current)
+                if expected_hash != 'unverified':
+                    try:
+                        actual = sha(read(ftp,pathlib.PurePosixPath(path).name))
+                    except ftplib.error_perm as error:
+                        if not str(error).startswith('550'):
+                            raise
+                        actual = None
+                    if actual == sha(data):
+                        return
+                    if actual != expected_hash:
+                        raise RuntimeError('Remote target changed immediately before transfer')
                 ftp.storbinary('STOR '+pathlib.PurePosixPath(path).name,io.BytesIO(data))
                 if sha(read(ftp,pathlib.PurePosixPath(path).name)) != sha(data):
                     raise RuntimeError('Uploaded checksum mismatch')
@@ -198,6 +279,11 @@ def transfer(path, data, root):
 def deploy():
     report=json.loads((STATE/'inventory.json').read_text(encoding='utf-8'))
     payload=json.loads((STATE/'manifest.json').read_text(encoding='utf-8'))
+    validate_payload(payload)
+    if report.get('manifest_sha256') != sha((STATE/'manifest.json').read_bytes()):
+        raise RuntimeError('Release changed after inventory; repeat reviewed inventory')
+    if set(report.get('target_hashes', {})) != {f['path'] for f in payload['files']}:
+        raise RuntimeError('Complete target backup inventory is required')
     root=report['document_root']
     owned_path=STATE/'owned.json'
     owned=json.loads(owned_path.read_text(encoding='utf-8')) if owned_path.exists() else {'files':[]}
@@ -205,6 +291,24 @@ def deploy():
     with connect() as ftp:
         assert document_root(ftp)==root
         current={e['name']:e for e in entries(ftp)}
+        for f in payload['files']:
+            path=f['path']
+            data=(ROOT/'dist'/path).read_bytes()
+            if sha(data)!=f['sha256']:
+                raise RuntimeError('Local artifact changed after manifest: '+path)
+            expected=report['target_hashes'][path]
+            if expected is not None:
+                backup=STATE/'backup/targets'/path
+                if not backup.exists() or sha(backup.read_bytes())!=expected:
+                    raise RuntimeError('Target backup is missing or corrupt: '+path)
+            try:
+                actual=sha(read(ftp,path))
+            except ftplib.error_perm as error:
+                if not str(error).startswith('550'):
+                    raise
+                actual=None
+            if actual!=expected:
+                raise RuntimeError('Remote target changed after inventory: '+path)
         # Only index is explicitly user-authorized for replacement. Preserve other unknown root files.
         for f in payload['files']:
             path=f['path']
@@ -229,13 +333,15 @@ def deploy():
                     raise RuntimeError('Existing asset is unknown or changed since previous deploy: '+path)
     uploaded=[]
     for f in sorted(payload['files'],key=lambda f:(f['path']=='index.html',f['path'].endswith('.html'),'/' not in f['path'],f['path'])):
+        if report['target_hashes'][f['path']]==f['sha256']:
+            continue
         data=(ROOT/'dist'/f['path']).read_bytes()
         assert sha(data)==f['sha256']
-        transfer(f['path'],data,root)
+        transfer(f['path'],data,root,expected_hash=report['target_hashes'][f['path']])
         uploaded.append(f)
         (STATE/'uploaded.json').write_text(json.dumps(uploaded,indent=2),encoding='utf-8')
     (STATE/'owned.json').write_bytes((ROOT/'dist'/OWNER_PATH).read_bytes())
-    print(json.dumps({'uploaded':len(uploaded),'index_last':uploaded[-1]['path']=='index.html','port':21,'deleted':0}))
+    print(json.dumps({'uploaded':len(uploaded),'unchanged':len(payload['files'])-len(uploaded),'index_last':not uploaded or uploaded[-1]['path']=='index.html','port':21,'deleted':0}))
 
 def verify():
     before=json.loads((STATE/'inventory.json').read_text(encoding='utf-8'))
@@ -268,6 +374,30 @@ def verify():
 
 def rollback():
     report=json.loads((STATE/'inventory.json').read_text(encoding='utf-8'))
+    if 'target_hashes' in report:
+        payload=json.loads((STATE/'manifest.json').read_text(encoding='utf-8'))
+        validate_payload(payload)
+        if report.get('manifest_sha256')!=sha((STATE/'manifest.json').read_bytes()):
+            raise RuntimeError('Rollback manifest differs from inventoried release')
+        changed={f['path'] for f in payload['files'] if report['target_hashes'].get(f['path'])!=f['sha256']}
+        originals=[]
+        for path,checksum in report['target_hashes'].items():
+            if checksum is None or path not in changed:
+                continue
+            if not allowed(path):
+                raise RuntimeError('Rollback target is outside portfolio scope')
+            data=(STATE/'backup/targets'/path).read_bytes()
+            if sha(data)!=checksum:
+                raise RuntimeError('Rollback backup checksum mismatch: '+path)
+            originals.append((path,data))
+        # Validate every backup before the first remote write.
+        restored=[]
+        for path,data in sorted(originals,key=lambda item:(item[0]=='index.html',item[0])):
+            transfer(path,data,report['document_root'])
+            restored.append(path)
+        (STATE/'rollback.json').write_text(json.dumps({'restored':restored,'deleted':0},indent=2),encoding='utf-8')
+        print('All previously existing changed targets restored, including English HTML; index last. No remote removals.')
+        return
     backup=STATE/'backup/index.html'
     if not backup.exists():
         raise RuntimeError('No previous index exists; use a reviewed maintenance index instead')
