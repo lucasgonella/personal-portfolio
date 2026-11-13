@@ -146,3 +146,20 @@ test('Small mobile viewport has readable career context and no horizontal overfl
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
   }
 })
+
+test('Mobile header stays stable while the application module loads',async({page})=>{
+  await page.setViewportSize({width:390,height:844})
+  let release!:()=>void
+  const gate=new Promise<void>(resolve=>{release=resolve})
+  await page.route('**/gonella-portfolio-v1/index-*.js',async route=>{await gate;await route.continue()})
+  try{
+    await page.goto('/',{waitUntil:'commit'})
+    await expect(page.locator('html')).toHaveClass(/js/)
+    await expect(page.locator('.site-header')).toBeVisible()
+    const initialHeight=await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height)
+    expect(initialHeight).toBe(70)
+    release()
+    await expect(page.locator('.stack-card').first()).toBeEnabled()
+    expect(await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height)).toBe(initialHeight)
+  }finally{release()}
+})
